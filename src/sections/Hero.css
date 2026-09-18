@@ -19,9 +19,9 @@
 }
 
 .hero-title {
-  font-size: clamp(3.4rem, 11vw, 8.5rem);
+  font-size: clamp(3.2rem, 10vw, 7.8rem);
   font-weight: 700;
-  text-transform: uppercase;
+  letter-spacing: -0.03em;
 }
 
 .hero-title-line {
@@ -62,7 +62,7 @@
 
 .hero-cta--primary {
   background: var(--accent);
-  color: #140904;
+  color: var(--on-accent);
   position: relative;
   overflow: hidden;
   isolation: isolate;

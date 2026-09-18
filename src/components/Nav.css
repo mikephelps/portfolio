@@ -136,7 +136,7 @@
   padding: 0 0.4rem 0 1.1rem;
   border-radius: var(--radius-pill);
   background: var(--accent);
-  color: #140904;
+  color: var(--on-accent);
   font-size: 0.86rem;
   font-weight: 600;
   position: relative;
@@ -164,7 +164,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(20, 9, 4, 0.14);
+  background: rgba(255, 255, 255, 0.16);
   transition: transform var(--dur-fast) var(--ease-snap);
 }
 

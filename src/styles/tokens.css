@@ -6,11 +6,12 @@
   --ink-dim: #a8a7ad;
   --ink-faint: #6b6a70;
 
-  /* accent — hot coral/orange */
-  --accent: #ff5a3c;
-  --accent-bright: #ff8a5c;
-  --accent-dim: #c94328;
-  --accent-glow: rgba(255, 90, 60, 0.35);
+  /* accent — electric violet */
+  --accent: #5a2cda;
+  --accent-bright: #9270ff;
+  --accent-dim: #3a1f96;
+  --accent-glow: rgba(90, 44, 218, 0.4);
+  --on-accent: #f5f2ff;
 
   /* glass */
   --glass-bg: rgba(255, 255, 255, 0.055);
@@ -20,7 +21,7 @@
   --glass-shadow: rgba(0, 0, 0, 0.45);
 
   /* type */
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
   /* layout */

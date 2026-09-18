@@ -17,5 +17,6 @@
 .section-heading-title {
   margin-top: 0.5rem;
   font-size: clamp(2.1rem, 5vw, 3.6rem);
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }

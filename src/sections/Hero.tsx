@@ -36,7 +36,7 @@ export default function Hero() {
         variants={container}
       >
         <motion.span className="eyebrow hero-eyebrow" variants={fadeUp}>
-          Developer &amp; Designer
+          Lead UX Designer
         </motion.span>
 
         <h1 className="hero-title">
@@ -50,8 +50,9 @@ export default function Hero() {
         </h1>
 
         <motion.p className="hero-sub" variants={fadeUp}>
-          I build fast, considered products — where clean engineering and
-          careful visual craft are the same discipline, not two separate jobs.
+          I lead end-to-end product design — research, systems, and interface
+          craft — and build the front end myself when it counts, so nothing
+          gets lost in translation.
         </motion.p>
 
         <motion.div className="hero-actions" variants={fadeUp}>

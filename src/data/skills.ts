@@ -5,19 +5,19 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    label: "Engineering",
-    items: ["TypeScript", "React", "Node.js", "GraphQL", "PostgreSQL"],
+    label: "Design & UX",
+    items: ["Product design", "UX research", "Interaction design", "Design systems"],
   },
   {
-    label: "Design",
-    items: ["Product design", "Design systems", "Motion design", "Figma"],
+    label: "Craft",
+    items: ["Prototyping", "Motion design", "Accessibility", "Figma"],
   },
   {
-    label: "3D & Motion",
-    items: ["Three.js", "WebGL / GLSL", "Framer Motion"],
+    label: "Front-end",
+    items: ["TypeScript", "React", "Framer Motion", "Three.js / WebGL"],
   },
   {
     label: "Tools",
-    items: ["Git", "Docker", "CI/CD", "Vercel/AWS"],
+    items: ["Git", "Docker", "CI/CD", "Vercel / AWS"],
   },
 ];

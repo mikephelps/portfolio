@@ -78,6 +78,33 @@ export function IconLinkedin({ size = 18 }: IconProps) {
   );
 }
 
+export function IconLayers({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <path d="m12 3 8.5 4.9L12 12.8 3.5 7.9 12 3Z" />
+      <path d="m3.5 12 8.5 4.9L20.5 12" />
+      <path d="m3.5 16.1 8.5 4.9 8.5-4.9" />
+    </svg>
+  );
+}
+
+export function IconBolt({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <path d="M12.5 3 5 13.5h5.5L11 21l7.5-10.5H13z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconCompass({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="m14.8 9.2-2 5.6-5.6 2 2-5.6z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function IconMenu({ size = 20 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={1.7}>

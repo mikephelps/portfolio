@@ -7,6 +7,8 @@ import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useScrolled } from "../hooks/useScrolled";
 import "./Nav.css";
 
+const resumeHref = `${import.meta.env.BASE_URL}resume.pdf`;
+
 export default function Nav() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,7 +53,7 @@ export default function Nav() {
             })}
           </ul>
 
-          <a href="/resume.pdf" download className="nav-resume">
+          <a href={resumeHref} download className="nav-resume">
             <span className="nav-resume-label">Resume</span>
             <span className="nav-resume-icon">
               <IconDownload size={15} />
@@ -90,7 +92,7 @@ export default function Nav() {
               ))}
             </ul>
             <a
-              href="/resume.pdf"
+              href={resumeHref}
               download
               className="nav-resume nav-resume--mobile"
               onClick={() => setMenuOpen(false)}

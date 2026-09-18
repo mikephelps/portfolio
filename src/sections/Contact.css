@@ -1,0 +1,90 @@
+.contact-card {
+  padding: clamp(2.2rem, 6vw, 4rem);
+  border-radius: var(--radius-lg);
+}
+
+.contact-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem 0.5rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+}
+
+.contact-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5be08a;
+  box-shadow: 0 0 0 4px rgba(91, 224, 138, 0.16);
+}
+
+.contact-copy {
+  margin-top: 1.8rem;
+  max-width: 34rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.contact-actions {
+  margin-top: 2.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 600;
+}
+
+.contact-email svg {
+  color: var(--accent);
+  transition: transform var(--dur-fast) var(--ease-snap);
+}
+
+.contact-email:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.contact-socials {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.contact-social {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  color: var(--ink-dim);
+  transition:
+    color var(--dur-fast) var(--ease-premium),
+    border-color var(--dur-fast) var(--ease-premium),
+    transform var(--dur-fast) var(--ease-snap);
+}
+
+.contact-social:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  transform: translateY(-3px);
+}

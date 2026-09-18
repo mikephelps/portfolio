@@ -1,0 +1,21 @@
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.4rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.section-heading-index {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--ink-faint);
+  padding-bottom: 0.4rem;
+}
+
+.section-heading-title {
+  margin-top: 0.5rem;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  text-transform: uppercase;
+}

@@ -1,0 +1,126 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.about-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--ink-faint);
+}
+
+.about-portrait-mark {
+  position: relative;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.about-portrait-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at 30% 20%,
+    var(--accent-glow),
+    transparent 55%
+  );
+  filter: blur(10px);
+}
+
+.about-lede {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.about-body {
+  margin-top: 1.4rem;
+  max-width: 46rem;
+  color: var(--ink-dim);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.about-stats {
+  margin-top: 2.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.6rem, 4vw, 3.2rem);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.about-stat-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.about-stat-label {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  max-width: 10rem;
+}
+
+.about-skills {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.about-skill-group {
+  padding: 1.4rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--dur-fast) var(--ease-snap),
+    border-color var(--dur-fast) var(--ease-premium);
+}
+
+.about-skill-group:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.about-skill-group-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+.about-skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.about-skill-list li {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 860px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-portrait {
+    max-width: 220px;
+  }
+}

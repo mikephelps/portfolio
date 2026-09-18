@@ -1,0 +1,39 @@
+:root {
+  /* surface */
+  --bg: #08080a;
+  --bg-elevated: #0d0d10;
+  --ink: #f4f3f1;
+  --ink-dim: #a8a7ad;
+  --ink-faint: #6b6a70;
+
+  /* accent — hot coral/orange */
+  --accent: #ff5a3c;
+  --accent-bright: #ff8a5c;
+  --accent-dim: #c94328;
+  --accent-glow: rgba(255, 90, 60, 0.35);
+
+  /* glass */
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-bg-strong: rgba(255, 255, 255, 0.09);
+  --glass-border: rgba(255, 255, 255, 0.11);
+  --glass-highlight: rgba(255, 255, 255, 0.4);
+  --glass-shadow: rgba(0, 0, 0, 0.45);
+
+  /* type */
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* layout */
+  --edge: clamp(1.5rem, 5vw, 4.5rem);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  /* motion */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.55s;
+  --dur-slow: 0.9s;
+}

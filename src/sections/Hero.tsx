@@ -1,6 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { IconArrowUpRight } from "../components/Icons";
 import { easePremium, fadeUpItem, staggerContainer } from "../lib/motion";
+import portraitImg from "../assets/portrait.webp";
 import "./Hero.css";
 
 const headline = ["Mike", "Phelps"];
@@ -53,6 +54,20 @@ export default function Hero() {
             <span>Get in touch</span>
           </a>
         </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="hero-portrait"
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1, delay: 0.5, ease: easePremium }}
+      >
+        <div className="hero-portrait-glow" aria-hidden="true" />
+        <img
+          src={portraitImg}
+          alt="Portrait of Mike Phelps"
+          className="hero-portrait-img"
+        />
       </motion.div>
 
       <motion.a

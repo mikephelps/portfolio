@@ -1,0 +1,4 @@
+.client-case-list {
+  display: flex;
+  flex-direction: column;
+}

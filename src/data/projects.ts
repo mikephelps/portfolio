@@ -1,7 +1,12 @@
 import type { ComponentType } from "react";
 import { IconBolt, IconCompass, IconLayers } from "../components/Icons";
 
-export type Project = {
+export type Screen = {
+  id: string;
+  label: string;
+};
+
+export type ClientProject = {
   id: string;
   index: string;
   year: string;
@@ -11,11 +16,11 @@ export type Project = {
   tech: string[];
   link?: string;
   repo?: string;
-  image: { caption: string };
+  screens: Screen[];
   Icon: ComponentType<{ size?: number }>;
 };
 
-export const projects: Project[] = [
+export const clientProjects: ClientProject[] = [
   {
     id: "aperture",
     index: "01",
@@ -27,8 +32,13 @@ export const projects: Project[] = [
     tech: ["Figma", "Design systems", "React", "TypeScript", "D3.js"],
     link: "#",
     repo: "#",
-    image: { caption: "Dashboard overview" },
     Icon: IconLayers,
+    screens: [
+      { id: "overview", label: "Dashboard overview" },
+      { id: "chart", label: "Live chart detail" },
+      { id: "workspace", label: "Team workspace" },
+      { id: "mobile", label: "Mobile view" },
+    ],
   },
   {
     id: "northwind",
@@ -40,8 +50,11 @@ export const projects: Project[] = [
       "A headless commerce storefront and the component library behind it — built for speed, with motion-first micro-interactions on top of a strict performance budget.",
     tech: ["Product strategy", "Design systems", "Next.js", "Framer Motion"],
     link: "#",
-    image: { caption: "Storefront home" },
     Icon: IconBolt,
+    screens: [
+      { id: "home", label: "Storefront home" },
+      { id: "product", label: "Product detail" },
+    ],
   },
   {
     id: "orbit",
@@ -53,7 +66,12 @@ export const projects: Project[] = [
       "A WebGL product configurator that lets users customize a physical product in real time, tweak materials, and export a shareable render — concept through code.",
     tech: ["User research", "Prototyping", "Three.js", "React"],
     repo: "#",
-    image: { caption: "Configurator UI" },
     Icon: IconCompass,
+    screens: [
+      { id: "configurator", label: "Configurator UI" },
+      { id: "render", label: "Render export" },
+      { id: "materials", label: "Material picker" },
+      { id: "share", label: "Share flow" },
+    ],
   },
 ];

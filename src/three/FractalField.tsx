@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { generateSierpinskiPoints } from "./generateFractalPoints";
+import { generateFractalPoints } from "./generateFractalPoints";
 import { particleFragmentShader, particleVertexShader } from "./particleShader";
 
 const COUNT = 2800;
@@ -20,7 +20,7 @@ export default function FractalField() {
 
   const { geometry, home } = useMemo(() => {
     const xOffset = viewport.width * 0.14;
-    const homeArr = generateSierpinskiPoints(COUNT, viewport.width, viewport.height, xOffset);
+    const homeArr = generateFractalPoints(COUNT, viewport.width, viewport.height, xOffset);
     const positions = homeArr.slice();
     const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
@@ -42,7 +42,7 @@ export default function FractalField() {
       return;
     }
     const xOffset = viewport.width * 0.14;
-    const newHome = generateSierpinskiPoints(COUNT, viewport.width, viewport.height, xOffset);
+    const newHome = generateFractalPoints(COUNT, viewport.width, viewport.height, xOffset);
     home.current = newHome;
     const posAttr = geometry.attributes.position as THREE.BufferAttribute;
     (posAttr.array as Float32Array).set(newHome);

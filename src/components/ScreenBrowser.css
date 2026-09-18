@@ -1,0 +1,136 @@
+.screen-browser {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.screen-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.screen-list-item {
+  position: relative;
+}
+
+.screen-list-btn {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 0.92rem;
+  transition: color var(--dur-fast) var(--ease-premium);
+  overflow: hidden;
+}
+
+.screen-list-btn:hover {
+  color: var(--ink-dim);
+}
+
+.screen-list-btn--active,
+.screen-list-btn--active:hover {
+  color: var(--ink);
+}
+
+.screen-list-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.screen-list-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  flex-shrink: 0;
+  transition: background var(--dur-fast) var(--ease-premium);
+}
+
+.screen-list-btn--active .screen-list-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px 1px var(--accent-glow);
+}
+
+.screen-panel {
+  position: sticky;
+  top: calc(clamp(0.9rem, 2.5vw, 1.75rem) + 96px);
+}
+
+.screen-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.screen-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.screen-frame-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.screen-frame-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.screen-frame-label {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+
+.screen-frame-media {
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.3rem;
+  position: relative;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.06), transparent 55%),
+    linear-gradient(160deg, #17131f 0%, #0c0a12 60%, #0a0a0c 100%);
+}
+
+.screen-frame-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 85%, var(--accent-glow), transparent 60%);
+  opacity: 0.5;
+}
+
+.screen-frame-caption {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  .screen-browser {
+    grid-template-columns: 1fr;
+  }
+
+  .screen-panel {
+    position: static;
+  }
+}

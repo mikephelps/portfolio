@@ -1,10 +1,12 @@
 import { useState } from "react";
-import Reveal from "../components/Reveal";
+import { motion } from "framer-motion";
 import SectionHeading from "../components/SectionHeading";
 import { IconArrowUpRight, IconGithub, IconLinkedin } from "../components/Icons";
+import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./Contact.css";
 
 const EMAIL = "hello@example.com";
+const cardStagger = staggerContainer(0.1);
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -23,18 +25,24 @@ export default function Contact() {
     <section id="contact" className="section contact">
       <SectionHeading index="03" eyebrow="Contact" title="Let's build something" />
 
-      <Reveal className="contact-card glass glass-strong">
-        <div className="contact-status">
+      <motion.div
+        className="contact-card glass glass-strong"
+        initial="hidden"
+        whileInView="show"
+        viewport={fadeUpViewport}
+        variants={cardStagger}
+      >
+        <motion.div className="contact-status" variants={fadeUpItem}>
           <span className="contact-status-dot" />
           Available for select freelance &amp; full-time roles
-        </div>
+        </motion.div>
 
-        <p className="contact-copy">
+        <motion.p className="contact-copy" variants={fadeUpItem}>
           Have a project in mind, or just want to talk shop about the
           intersection of engineering and design? My inbox is open.
-        </p>
+        </motion.p>
 
-        <div className="contact-actions">
+        <motion.div className="contact-actions" variants={fadeUpItem}>
           <button type="button" className="contact-email" onClick={handleCopy}>
             <span>{copied ? "Copied to clipboard" : EMAIL}</span>
             <IconArrowUpRight size={18} />
@@ -48,8 +56,8 @@ export default function Contact() {
               <IconLinkedin size={19} />
             </a>
           </div>
-        </div>
-      </Reveal>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

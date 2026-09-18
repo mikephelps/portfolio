@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import Logo from "../components/Logo";
 import { skillGroups } from "../data/skills";
+import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./About.css";
 
 const stats = [
@@ -9,6 +11,8 @@ const stats = [
   { value: "30+", label: "Shipped products" },
   { value: "2", label: "Disciplines, one craft" },
 ];
+
+const rowStagger = staggerContainer(0.08);
 
 export default function About() {
   return (
@@ -43,29 +47,41 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.24} className="about-stats">
+          <motion.div
+            className="about-stats"
+            initial="hidden"
+            whileInView="show"
+            viewport={fadeUpViewport}
+            variants={rowStagger}
+          >
             {stats.map((stat) => (
-              <div className="about-stat" key={stat.label}>
+              <motion.div className="about-stat" key={stat.label} variants={fadeUpItem}>
                 <span className="about-stat-value">{stat.value}</span>
                 <span className="about-stat-label">{stat.label}</span>
-              </div>
+              </motion.div>
             ))}
-          </Reveal>
+          </motion.div>
         </div>
       </div>
 
-      <Reveal delay={0.1} className="about-skills">
+      <motion.div
+        className="about-skills"
+        initial="hidden"
+        whileInView="show"
+        viewport={fadeUpViewport}
+        variants={rowStagger}
+      >
         {skillGroups.map((group) => (
-          <div className="about-skill-group glass" key={group.label}>
+          <motion.div className="about-skill-group glass" key={group.label} variants={fadeUpItem}>
             <span className="about-skill-group-label">{group.label}</span>
             <ul className="about-skill-list">
               {group.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
-      </Reveal>
+      </motion.div>
     </section>
   );
 }

@@ -1,37 +1,55 @@
-import Reveal from "./Reveal";
+import { motion } from "framer-motion";
 import ScreenBrowser from "./ScreenBrowser";
 import { IconArrowUpRight, IconGithub } from "./Icons";
 import type { ClientProject } from "../data/projects";
+import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ClientCase.css";
 
 type ClientCaseProps = {
   project: ClientProject;
 };
 
+const headerStagger = staggerContainer(0.09);
+const chipStagger = staggerContainer(0.045);
+
 export default function ClientCase({ project }: ClientCaseProps) {
   return (
     <article className="client-case">
-      <Reveal className="client-case-header">
-        <div className="client-case-meta">
+      <motion.div
+        className="client-case-header"
+        initial="hidden"
+        whileInView="show"
+        viewport={fadeUpViewport}
+        variants={headerStagger}
+      >
+        <motion.div className="client-case-meta" variants={fadeUpItem}>
           <span className="client-case-icon">
             <project.Icon size={16} />
           </span>
           <span className="client-case-index">{project.index}</span>
           <span>{project.year}</span>
-        </div>
+        </motion.div>
 
-        <h3 className="client-case-title">{project.title}</h3>
-        <span className="client-case-role">{project.role}</span>
+        <motion.h3 className="client-case-title" variants={fadeUpItem}>
+          {project.title}
+        </motion.h3>
+        <motion.span className="client-case-role" variants={fadeUpItem}>
+          {project.role}
+        </motion.span>
 
-        <p className="client-case-description">{project.description}</p>
+        <motion.p className="client-case-description" variants={fadeUpItem}>
+          {project.description}
+        </motion.p>
 
-        <ul className="client-case-tech">
+        <motion.ul className="client-case-tech" variants={chipStagger}>
           {project.tech.map((tech) => (
-            <li key={tech}>{tech}</li>
+            <motion.li key={tech} variants={fadeUpItem}>
+              {tech}
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
-        <div className="client-case-links">
+        <motion.div className="client-case-links" variants={fadeUpItem}>
           {project.link && (
             <a href={project.link} className="client-case-link">
               <span>Live site</span>
@@ -44,12 +62,17 @@ export default function ClientCase({ project }: ClientCaseProps) {
               <span>Source</span>
             </a>
           )}
-        </div>
-      </Reveal>
+        </motion.div>
+      </motion.div>
 
-      <Reveal delay={0.08}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={fadeUpViewport}
+        transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+      >
         <ScreenBrowser idPrefix={project.id} title={project.title} screens={project.screens} />
-      </Reveal>
+      </motion.div>
     </article>
   );
 }

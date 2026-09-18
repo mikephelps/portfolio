@@ -1,14 +1,53 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import type { Screen } from "../data/projects";
 import { useScrollSpy } from "../hooks/useScrollSpy";
+import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
+
+const listStagger = staggerContainer(0.07);
 
 type ScreenBrowserProps = {
   idPrefix: string;
   title: string;
   screens: Screen[];
 };
+
+type ScreenListItemProps = {
+  screen: Screen;
+  itemId: string;
+  isActive: boolean;
+  onSelect: (id: string) => void;
+};
+
+function ScreenListItem({ screen, itemId, isActive, onSelect }: ScreenListItemProps) {
+  const ref = useRef<HTMLLIElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.65", "end 0.65"] });
+  const fillWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <motion.li ref={ref} id={itemId} className="screen-list-item" variants={fadeUpItem}>
+      <button
+        type="button"
+        className={`screen-list-btn ${isActive ? "screen-list-btn--active" : ""}`}
+        onClick={() => onSelect(itemId)}
+      >
+        <motion.span className="screen-list-fill" style={{ width: fillWidth }} />
+        {isActive && (
+          <motion.span
+            layoutId="screen-active-pill"
+            className="screen-list-pill"
+            transition={{ type: "spring", stiffness: 380, damping: 34 }}
+          />
+        )}
+        <span className="screen-list-icon">
+          <screen.Icon size={15} />
+        </span>
+        <span className="screen-list-label">{screen.label}</span>
+      </button>
+    </motion.li>
+  );
+}
 
 export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowserProps) {
   const ids = screens.map((screen) => `${idPrefix}-${screen.id}`);
@@ -34,38 +73,33 @@ export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowse
 
   return (
     <div className="screen-browser">
-      <ul className="screen-list">
+      <motion.ul
+        className="screen-list"
+        initial="hidden"
+        whileInView="show"
+        viewport={fadeUpViewport}
+        variants={listStagger}
+      >
         {screens.map((screen) => {
           const itemId = `${idPrefix}-${screen.id}`;
-          const isActive = activeId === itemId;
           return (
-            <li key={screen.id} id={itemId} className="screen-list-item">
-              <button
-                type="button"
-                className={`screen-list-btn ${isActive ? "screen-list-btn--active" : ""}`}
-                onClick={() => handleSelect(itemId)}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId={`${idPrefix}-active-pill`}
-                    className="screen-list-pill"
-                    transition={{ type: "spring", stiffness: 380, damping: 34 }}
-                  />
-                )}
-                <span className="screen-list-dot" />
-                <span className="screen-list-label">{screen.label}</span>
-              </button>
-            </li>
+            <ScreenListItem
+              key={screen.id}
+              screen={screen}
+              itemId={itemId}
+              isActive={activeId === itemId}
+              onSelect={handleSelect}
+            />
           );
         })}
-      </ul>
+      </motion.ul>
 
       <div className="screen-panel">
         <motion.div
           key={active.id}
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="screen-frame glass"
         >
           <div className="screen-frame-bar">

@@ -105,6 +105,46 @@ export function IconCompass({ size = 18, strokeWidth = 1.6 }: IconProps) {
   );
 }
 
+export function IconWindow({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <rect x="3" y="4.5" width="18" height="15" rx="2" />
+      <path d="M3 9h18" />
+      <path d="M7 6.7h.01M10 6.7h.01" />
+    </svg>
+  );
+}
+
+export function IconImage({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2" />
+      <circle cx="9" cy="10" r="1.6" />
+      <path d="m4.5 16.5 4.5-4.5 3 3 3.5-4.5 5 6" />
+    </svg>
+  );
+}
+
+export function IconSliders({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <path d="M4 6h9M17 6h3M4 12h3M9 12h11M4 18h13M21 18h-2" />
+      <circle cx="13" cy="6" r="2" />
+      <circle cx="7" cy="12" r="2" />
+      <circle cx="17" cy="18" r="2" />
+    </svg>
+  );
+}
+
+export function IconLayout({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M9 4v16" />
+    </svg>
+  );
+}
+
 export function IconMenu({ size = 20 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={1.7}>

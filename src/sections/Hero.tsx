@@ -1,29 +1,18 @@
 import { motion, type Variants } from "framer-motion";
 import { IconArrowUpRight } from "../components/Icons";
+import { easePremium, fadeUpItem, staggerContainer } from "../lib/motion";
 import "./Hero.css";
 
 const headline = ["Mike", "Phelps"];
 
-const premiumEase = [0.16, 1, 0.3, 1] as const;
-
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.09, delayChildren: 0.15 },
-  },
-};
+const container = staggerContainer(0.09, 0.15);
 
 const lineVariant: Variants = {
   hidden: { y: "115%" },
   show: {
     y: "0%",
-    transition: { duration: 1.1, ease: premiumEase },
+    transition: { duration: 1.1, ease: easePremium },
   },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: premiumEase } },
 };
 
 export default function Hero() {
@@ -35,7 +24,7 @@ export default function Hero() {
         animate="show"
         variants={container}
       >
-        <motion.span className="eyebrow hero-eyebrow" variants={fadeUp}>
+        <motion.span className="eyebrow hero-eyebrow" variants={fadeUpItem}>
           Lead UX Designer
         </motion.span>
 
@@ -49,13 +38,13 @@ export default function Hero() {
           ))}
         </h1>
 
-        <motion.p className="hero-sub" variants={fadeUp}>
+        <motion.p className="hero-sub" variants={fadeUpItem}>
           I lead end-to-end product design — research, systems, and interface
           craft — and build the front end myself when it counts, so nothing
           gets lost in translation.
         </motion.p>
 
-        <motion.div className="hero-actions" variants={fadeUp}>
+        <motion.div className="hero-actions" variants={fadeUpItem}>
           <a href="#projects" className="hero-cta hero-cta--primary">
             <span>View projects</span>
             <IconArrowUpRight size={17} />

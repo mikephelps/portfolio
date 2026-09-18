@@ -1,9 +1,20 @@
 import type { ComponentType } from "react";
-import { IconBolt, IconCompass, IconLayers } from "../components/Icons";
+import {
+  IconBolt,
+  IconCompass,
+  IconImage,
+  IconLayers,
+  IconLayout,
+  IconSliders,
+  IconWindow,
+} from "../components/Icons";
+
+type IconType = ComponentType<{ size?: number }>;
 
 export type Screen = {
   id: string;
   label: string;
+  Icon: IconType;
 };
 
 export type ClientProject = {
@@ -17,7 +28,7 @@ export type ClientProject = {
   link?: string;
   repo?: string;
   screens: Screen[];
-  Icon: ComponentType<{ size?: number }>;
+  Icon: IconType;
 };
 
 export const clientProjects: ClientProject[] = [
@@ -34,10 +45,10 @@ export const clientProjects: ClientProject[] = [
     repo: "#",
     Icon: IconLayers,
     screens: [
-      { id: "overview", label: "Dashboard overview" },
-      { id: "chart", label: "Live chart detail" },
-      { id: "workspace", label: "Team workspace" },
-      { id: "mobile", label: "Mobile view" },
+      { id: "overview", label: "Dashboard overview", Icon: IconLayout },
+      { id: "chart", label: "Live chart detail", Icon: IconSliders },
+      { id: "workspace", label: "Team workspace", Icon: IconWindow },
+      { id: "mobile", label: "Mobile view", Icon: IconImage },
     ],
   },
   {
@@ -52,8 +63,8 @@ export const clientProjects: ClientProject[] = [
     link: "#",
     Icon: IconBolt,
     screens: [
-      { id: "home", label: "Storefront home" },
-      { id: "product", label: "Product detail" },
+      { id: "home", label: "Storefront home", Icon: IconWindow },
+      { id: "product", label: "Product detail", Icon: IconImage },
     ],
   },
   {
@@ -68,10 +79,10 @@ export const clientProjects: ClientProject[] = [
     repo: "#",
     Icon: IconCompass,
     screens: [
-      { id: "configurator", label: "Configurator UI" },
-      { id: "render", label: "Render export" },
-      { id: "materials", label: "Material picker" },
-      { id: "share", label: "Share flow" },
+      { id: "configurator", label: "Configurator UI", Icon: IconSliders },
+      { id: "render", label: "Render export", Icon: IconImage },
+      { id: "materials", label: "Material picker", Icon: IconLayout },
+      { id: "share", label: "Share flow", Icon: IconWindow },
     ],
   },
 ];

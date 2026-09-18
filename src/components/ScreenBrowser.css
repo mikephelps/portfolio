@@ -41,27 +41,44 @@
   color: var(--ink);
 }
 
+/* Scroll-linked reading progress: fills left-to-right as the item passes
+   the trigger line, independent of which item is the "active" one. */
+.screen-list-fill {
+  position: absolute;
+  inset: 0;
+  right: auto;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: inherit;
+  z-index: -2;
+}
+
 .screen-list-pill {
   position: absolute;
   inset: 0;
   background: var(--glass-bg-strong);
   border: 1px solid var(--glass-border);
   border-radius: inherit;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   z-index: -1;
 }
 
-.screen-list-dot {
-  width: 6px;
-  height: 6px;
+.screen-list-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--ink-faint);
+  color: var(--ink-faint);
   flex-shrink: 0;
-  transition: background var(--dur-fast) var(--ease-premium);
+  transition:
+    color var(--dur-fast) var(--ease-premium),
+    background var(--dur-fast) var(--ease-premium);
 }
 
-.screen-list-btn--active .screen-list-dot {
-  background: var(--accent);
-  box-shadow: 0 0 8px 1px var(--accent-glow);
+.screen-list-btn--active .screen-list-icon {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .screen-panel {

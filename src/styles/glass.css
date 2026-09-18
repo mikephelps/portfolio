@@ -37,3 +37,11 @@
 .glass-strong {
   background: var(--glass-bg-strong);
 }
+
+/* Lighter frost for small standalone surfaces (chips, badges, pills) that
+   already carry their own border/fill and just need the moving background
+   behind them softened so their text stays legible. */
+.chip-blur {
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}

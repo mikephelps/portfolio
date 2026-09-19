@@ -11,8 +11,13 @@
   top: 96px;
 }
 
+/* No top padding on any case: each one pins at a fixed offset from the
+   viewport top (see .client-case-sticky), so top padding here would just
+   push the pinned content down inside that fixed window and clip the
+   bottom of the browser panel — it doesn't create visual separation from
+   the previous case the way it would in normal document flow. */
 .client-case {
-  padding: clamp(3rem, 6vw, 5rem) 0;
+  padding: 0 0 clamp(2rem, 4vw, 3rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.09);
 }
 
@@ -24,10 +29,6 @@
   .client-case-sticky {
     top: 64px;
   }
-}
-
-.client-case-frame:first-child .client-case {
-  padding-top: 0;
 }
 
 .client-case-frame:last-child .client-case {

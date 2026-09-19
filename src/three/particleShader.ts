@@ -24,8 +24,13 @@ void main() {
   // A tight edge falloff instead of a wide gaussian glow — reads as a
   // crisp dot rather than a soft, hazy blob.
   float edge = smoothstep(0.5, 0.34, dist);
-  float alpha = pow(edge, 1.5);
+  // Dim by default so the field never fights with text sitting on top of
+  // it; only particles the pointer is actively repelling (a much larger
+  // displacement than the constant ambient drift ever produces) light up
+  // toward full opacity, giving a punchy, localized hover response.
+  float energyFactor = smoothstep(0.22, 0.65, vEnergy);
+  float alpha = pow(edge, 1.5) * mix(0.2, 1.0, energyFactor);
   vec3 color = mix(uColor, uColorHot, clamp(vEnergy * 1.4, 0.0, 1.0));
-  gl_FragColor = vec4(color, alpha * (0.9 + vEnergy * 0.5));
+  gl_FragColor = vec4(color, alpha);
 }
 `;

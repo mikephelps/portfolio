@@ -158,10 +158,6 @@ export default function FractalField() {
     posAttr.needsUpdate = true;
     (energyAttr.array as Float32Array).set(en);
     energyAttr.needsUpdate = true;
-
-    if (pointsRef.current) {
-      pointsRef.current.rotation.z += 0.00055;
-    }
   });
 
   return (

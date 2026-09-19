@@ -8,11 +8,27 @@
 .screen-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-.screen-list-item {
+/* Each zone is a fixed-height slot (its height drives the scroll-position
+   math in ScreenBrowser.tsx, so JS and CSS must agree). The hit area fills
+   the whole zone so there's a large, forgiving click target, but the
+   visible row inside it stays small and text-hugging. */
+.screen-zone {
   position: relative;
+  height: 220px;
+}
+
+.screen-zone-hit {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
 /* The highlighter sweep: a narrow, text-hugging marker bar — not a padded
@@ -22,17 +38,14 @@
    settles to a muted gray once you've moved on — that gray + dimmed text
    together read as "completed". Not-yet-reached items are plain white
    text with no background at all. */
-.screen-list-btn {
+.screen-list-row {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  margin-left: -0.4rem;
+  margin-left: 0.4rem;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  text-align: left;
-  background: none;
-  border: none;
   color: var(--ink);
   font-size: 0.95rem;
   overflow: hidden;
@@ -68,8 +81,8 @@
   white-space: nowrap;
 }
 
-.screen-list-btn--completed .screen-list-icon,
-.screen-list-btn--completed .screen-list-label {
+.screen-list-row--completed .screen-list-icon,
+.screen-list-row--completed .screen-list-label {
   opacity: 0.6;
 }
 
@@ -137,6 +150,10 @@
 @media (max-width: 860px) {
   .screen-browser {
     grid-template-columns: 1fr;
+  }
+
+  .screen-zone {
+    height: 110px;
   }
 
   .screen-panel {

@@ -1,18 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  animate,
-  motion,
-  useMotionValue,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { AnimatePresence, animate, motion, useMotionValue, useTransform } from "framer-motion";
 import type { Screen } from "../data/projects";
-import { ACTIVE_TRIGGER_FRACTION, useActiveIndexByPosition } from "../hooks/useActiveIndexByPosition";
 import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
 
 const listStagger = staggerContainer(0.07);
+
+// Where in the viewport a zone "activates" — the same fraction is used by
+// both the passive scroll listener and the click handler's scroll target,
+// so the two can never disagree about which zone is current.
+const TRIGGER_FRACTION = 0.5;
 
 type ScreenBrowserProps = {
   idPrefix: string;
@@ -20,112 +17,119 @@ type ScreenBrowserProps = {
   screens: Screen[];
 };
 
+type ItemState = "upcoming" | "active" | "completed";
+
 type ScreenListItemProps = {
   screen: Screen;
   itemId: string;
-  isActive: boolean;
-  onSelect: (id: string) => void;
+  state: ItemState;
+  onSelect: () => void;
 };
 
-function ScreenListItem({ screen, itemId, isActive, onSelect }: ScreenListItemProps) {
-  const ref = useRef<HTMLLIElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.65", "end 0.65"] });
-  const progress = useMotionValue(0);
-  const [visited, setVisited] = useState(false);
+function ScreenListItem({ screen, itemId, state, onSelect }: ScreenListItemProps) {
+  const width = useMotionValue(state === "completed" ? 1 : 0);
 
-  // Width tracks the real scroll position while this item isn't the active
-  // one — that's the "highlighter sweeping across as you scroll" effect.
-  // Once it becomes active (by scroll or by a click jump), animate it to a
-  // full, deliberate ~1.5s sweep — not an instant snap — then hand control
-  // back to the scroll position once it isn't active any more.
+  // The active item always plays the same deliberate ~1.5s sweep, entirely
+  // decoupled from how fast the user scrolled to reach it. Anything else
+  // just snaps to its resting value (full gray once passed, invisible
+  // until reached) — no continuous scroll-tracking, no partial states to
+  // get stuck.
   useEffect(() => {
-    if (isActive) {
-      const controls = animate(progress, 1, { duration: 1.5, ease: easePremium });
+    if (state === "active") {
+      const controls = animate(width, 1, { duration: 1.5, ease: easePremium });
       return () => controls.stop();
     }
-    // Resync immediately rather than waiting for the next scroll event —
-    // otherwise an item that just went from active to inactive stays stuck
-    // showing a full purple (not yet-recomputed) sweep until something
-    // happens to nudge scrollYProgress again.
-    progress.set(scrollYProgress.get());
-    const unsubscribe = scrollYProgress.on("change", (v) => progress.set(v));
-    return unsubscribe;
-  }, [isActive, progress, scrollYProgress]);
+    width.set(state === "completed" ? 1 : 0);
+  }, [state, width]);
 
-  useEffect(() => {
-    const unsubscribe = progress.on("change", (v) => setVisited(v >= 0.96));
-    return unsubscribe;
-  }, [progress]);
-
-  const fillWidth = useTransform(progress, (v) => `${v * 100}%`);
-  const isCompleted = visited && !isActive;
+  const fillWidth = useTransform(width, (v) => `${v * 100}%`);
 
   return (
-    <motion.li ref={ref} id={itemId} className="screen-list-item" variants={fadeUpItem}>
-      <button
-        type="button"
-        className={`screen-list-btn ${isCompleted ? "screen-list-btn--completed" : ""}`}
-        onClick={() => onSelect(itemId)}
-      >
-        <motion.span
-          className={`screen-list-highlight ${isCompleted ? "screen-list-highlight--completed" : ""}`}
-          style={{ width: fillWidth }}
-        />
-        <span className="screen-list-icon">
-          <screen.Icon size={15} />
+    <motion.li id={itemId} className="screen-zone" variants={fadeUpItem}>
+      <button type="button" className="screen-zone-hit" onClick={onSelect}>
+        <span className={`screen-list-row ${state === "completed" ? "screen-list-row--completed" : ""}`}>
+          <motion.span
+            className={`screen-list-highlight ${state === "completed" ? "screen-list-highlight--completed" : ""}`}
+            style={{ width: fillWidth }}
+          />
+          <span className="screen-list-icon">
+            <screen.Icon size={15} />
+          </span>
+          <span className="screen-list-label">{screen.label}</span>
         </span>
-        <span className="screen-list-label">{screen.label}</span>
       </button>
     </motion.li>
   );
 }
 
 export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowserProps) {
-  const ids = screens.map((screen) => `${idPrefix}-${screen.id}`);
-  const activeIndex = useActiveIndexByPosition(ids);
-  const scrollSpyId = ids[activeIndex];
-
-  // A fast scroll ticks the position-based index quickly as it passes
-  // several items; settling the value before it drives the (expensive,
-  // image-swapping) panel keeps that from ever flashing through them.
-  const [settledSpyId, setSettledSpyId] = useState(scrollSpyId);
-  useEffect(() => {
-    const timeout = setTimeout(() => setSettledSpyId(scrollSpyId), 140);
-    return () => clearTimeout(timeout);
-  }, [scrollSpyId]);
-
-  // A click wins immediately rather than waiting on the debounce. It has to
-  // stay in charge until the smooth scroll it triggers actually finishes —
-  // clearing on a fixed timeout let the position-based hook recompute mid
-  // -scroll (still settling toward the target) and occasionally land on
-  // the wrong item. `scrollend` clears it precisely; the timeout is only a
-  // fallback for browsers that don't support that event.
-  const [override, setOverride] = useState<string | null>(null);
+  const zonesRef = useRef<HTMLUListElement>(null);
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const [override, setOverride] = useState<number | null>(null);
+  // Mirrors `override` but updates synchronously at click-time, independent
+  // of React's render/commit cycle. The scroll listener reads this ref
+  // (never the closed-over `override` state) so there is no window, however
+  // brief, where a stale listener still sees the pre-click value and lets a
+  // scroll event sneak in a transient scrollIndex update that flips the
+  // active item's state and resets its in-flight sweep animation.
+  const overrideRef = useRef<number | null>(null);
   const overrideCleanup = useRef<() => void>(undefined);
-  const activeId = override ?? settledSpyId;
-  const active = screens.find((screen) => `${idPrefix}-${screen.id}` === activeId) ?? screens[0];
 
-  const handleSelect = (id: string) => {
+  // Measures the rendered zone height straight off the DOM (so it always
+  // matches whatever the CSS actually sets, including the mobile
+  // breakpoint) and derives a single index from it. Used both by the
+  // passive scroll listener and to resync immediately once a click-jump's
+  // override clears — scrolling has already stopped by then, so no future
+  // "scroll" event exists to do that resync for us.
+  const measureIndex = () => {
+    const el = zonesRef.current;
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const zoneHeight = rect.height / screens.length;
+    const triggerY = window.innerHeight * TRIGGER_FRACTION;
+    const relative = triggerY - rect.top;
+    return Math.min(screens.length - 1, Math.max(0, Math.floor(relative / zoneHeight)));
+  };
+
+  // One scroll listener for the whole zone stack instead of N independent
+  // per-item trackers.
+  useEffect(() => {
+    const handle = () => {
+      if (overrideRef.current !== null) return;
+      setScrollIndex(measureIndex());
+    };
+    handle();
+    window.addEventListener("scroll", handle, { passive: true });
+    window.addEventListener("resize", handle);
+    return () => {
+      window.removeEventListener("scroll", handle);
+      window.removeEventListener("resize", handle);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screens.length]);
+
+  const activeIndex = override ?? scrollIndex;
+  const active = screens[activeIndex] ?? screens[0];
+
+  const handleSelect = (index: number) => {
     overrideCleanup.current?.();
-    setOverride(id);
+    overrideRef.current = index;
+    setOverride(index);
 
-    // scrollIntoView's block:"center" targets 50% of the viewport, but the
-    // active-position hook's trigger line sits at ACTIVE_TRIGGER_FRACTION —
-    // for a short list that mismatch can leave every item's center closer
-    // to a later item than the one actually clicked once the scroll
-    // settles. Scroll to the exact position that lands this item's center
-    // on the trigger line instead, so it's unambiguously the closest one.
-    const el = document.getElementById(id);
+    const el = zonesRef.current;
     if (el) {
       const rect = el.getBoundingClientRect();
-      const elCenter = rect.top + rect.height / 2;
-      const triggerY = window.innerHeight * ACTIVE_TRIGGER_FRACTION;
-      window.scrollTo({ top: window.scrollY + (elCenter - triggerY), behavior: "smooth" });
+      const zoneHeight = rect.height / screens.length;
+      const targetCenter = rect.top + index * zoneHeight + zoneHeight / 2;
+      const triggerY = window.innerHeight * TRIGGER_FRACTION;
+      window.scrollTo({ top: window.scrollY + (targetCenter - triggerY), behavior: "smooth" });
     }
 
     const timeout = setTimeout(clear, 1600);
     function clear() {
+      overrideRef.current = null;
       setOverride(null);
+      setScrollIndex(measureIndex());
       clearTimeout(timeout);
       window.removeEventListener("scrollend", clear);
     }
@@ -136,21 +140,23 @@ export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowse
   return (
     <div className="screen-browser">
       <motion.ul
+        ref={zonesRef}
         className="screen-list"
         initial="hidden"
         whileInView="show"
         viewport={fadeUpViewport}
         variants={listStagger}
       >
-        {screens.map((screen) => {
-          const itemId = `${idPrefix}-${screen.id}`;
+        {screens.map((screen, index) => {
+          const state: ItemState =
+            index < activeIndex ? "completed" : index === activeIndex ? "active" : "upcoming";
           return (
             <ScreenListItem
               key={screen.id}
               screen={screen}
-              itemId={itemId}
-              isActive={activeId === itemId}
-              onSelect={handleSelect}
+              itemId={`${idPrefix}-${screen.id}`}
+              state={state}
+              onSelect={() => handleSelect(index)}
             />
           );
         })}
@@ -163,7 +169,7 @@ export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowse
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.55, ease: easePremium }}
+            transition={{ duration: 0.5, ease: easePremium }}
             className="screen-frame glass"
           >
             <div className="screen-frame-bar">

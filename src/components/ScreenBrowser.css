@@ -142,6 +142,19 @@
   color: var(--ink-faint);
 }
 
+/* A real screenshot or video, once one exists (see ScreenFrameMedia).
+   Sized absolutely against the frame itself, which is what actually
+   controls the visible box — object-fit/object-position (set inline, per
+   screen) do the rest, so any source resolution or aspect ratio drops in
+   safely without ever changing the frame's own size. */
+.screen-frame-asset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
 /* ScreenBrowser (the tabbed, scroll-pinned scrub UI) only ever renders on
    desktop now — mobile uses ScreenStack, a plain scrolling list — so no
    narrow-viewport override is needed here.

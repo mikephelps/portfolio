@@ -3,10 +3,28 @@ import { IconBolt, IconCompass, IconImage, IconLayers, IconLayout, IconLinkedin,
 
 type IconType = ComponentType<{ size?: number }>;
 
+export type ScreenMedia = {
+  type: "image" | "video";
+  // Put files in src/assets/screens/ and import them (not a public/ path
+  // string) so Vite fingerprints and bundles them correctly.
+  src: string;
+  // "cover" (default) fills the frame and crops any excess; "contain"
+  // shows the whole asset letterboxed instead. Use "contain" for anything
+  // that isn't roughly the frame's own aspect ratio (a tall mobile-app
+  // screenshot, for instance) so nothing gets cropped away.
+  fit?: "cover" | "contain";
+  // CSS object-position. Defaults to "center" — for a full web page
+  // screenshot taller than the frame, "top" keeps the header/hero (the
+  // part that actually identifies the page) in frame instead of whatever
+  // happened to land in the vertical middle.
+  position?: string;
+};
+
 export type Screen = {
   id: string;
   label: string;
   Icon: IconType;
+  media?: ScreenMedia;
 };
 
 export type ClientProject = {

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { Screen } from "../data/projects";
+import ScreenFrameMedia from "./ScreenFrameMedia";
 import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenStack.css";
 
@@ -37,7 +38,7 @@ export default function ScreenStack({ idPrefix, screens }: ScreenStackProps) {
           </div>
           <div className="screen-frame glass">
             <div className="screen-frame-media">
-              <span className="screen-frame-caption">{screen.label}</span>
+              <ScreenFrameMedia screen={screen} />
             </div>
           </div>
         </motion.div>

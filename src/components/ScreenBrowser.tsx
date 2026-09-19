@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 import type { Screen } from "../data/projects";
+import ScreenFrameMedia from "./ScreenFrameMedia";
 import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
 
@@ -99,7 +100,7 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
               </span>
             </div>
             <div className="screen-frame-media">
-              <span className="screen-frame-caption">{active.label}</span>
+              <ScreenFrameMedia screen={active} />
             </div>
           </motion.div>
         </AnimatePresence>

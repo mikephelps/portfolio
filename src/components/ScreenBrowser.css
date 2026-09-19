@@ -1,16 +1,3 @@
-/* The frame is a tall spacer (its height is set inline, proportional to
-   screen count); .screen-browser-sticky pins the actual widget in place —
-   via plain CSS position:sticky, so the pin/release timing is free and
-   exact — while the user scrolls through that extra height. */
-.screen-browser-frame {
-  position: relative;
-}
-
-.screen-browser-sticky {
-  position: sticky;
-  top: 120px;
-}
-
 .screen-browser {
   display: grid;
   grid-template-columns: minmax(220px, 300px) 1fr;
@@ -161,10 +148,23 @@
   }
 
   .screen-zone {
-    height: 52px;
+    height: 48px;
   }
 
-  .screen-browser-sticky {
-    top: 90px;
+  .screen-frame-media {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+/* Shorter viewports need the whole pinned card (header + browser) to fit
+   without clipping — see ClientCase.css. Shrinking the media panel's
+   aspect ratio and the list's row height buys back the vertical room. */
+@media (max-height: 820px) {
+  .screen-frame-media {
+    aspect-ratio: 16 / 4.2;
+  }
+
+  .screen-zone {
+    height: 52px;
   }
 }

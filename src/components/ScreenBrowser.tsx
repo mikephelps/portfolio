@@ -103,7 +103,10 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
               <ScreenFrameMedia screen={active} />
               {active.description && (
                 <div className="screen-context-panel">
-                  <p className="screen-context-text">{active.description}</p>
+                  <div className="screen-context-inner">
+                    <span className="eyebrow screen-context-eyebrow">Project Details</span>
+                    <p className="screen-context-text">{active.description}</p>
+                  </div>
                 </div>
               )}
             </div>

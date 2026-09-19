@@ -180,22 +180,18 @@
   object-position: center;
 }
 
-/* Per-image context, revealed on hover. A shared translucent .glass
-   surface is NOT legible here — those tokens (58% opacity, 22px blur) are
-   tuned for sitting over the dim particle background, not a bright/busy
-   screenshot. An earlier attempt at a fix overcorrected the other way: a
-   near-opaque gradient (94-97%) that was legible but genuinely opaque —
-   not translucent, not actually blurring anything, just hiding it. Proven
-   (via a real busy/high-contrast test image, cropped and inspected pixel
-   by pixel) that blur(40px) + a MODERATE ~55% tint is enough to fully
-   obscure fine detail and text while still visibly showing blurred color
-   through the panel — genuine frosted glass, not a flat scrim.
-
-   Covers the full image now (not just a bottom sliver) so it reads as a
-   deliberate reveal rather than something easy to miss — the text block
-   itself stays a centered, comfortably-measured column so a short
-   description doesn't sprawl edge to edge, but its type is left-aligned
-   (paragraphs read better ragged-left than centered). */
+/* Per-image context, revealed on hover.
+   blur(40px) + ~55% tint was verified (pixel-inspected, this session)
+   to genuinely blur real image content in Chromium — but a live
+   screenshot came back showing zero blur AND zero darkening, on a
+   commit already confirmed deployed. Whatever the cause on that
+   device/browser (a different engine, an OS-level transparency-reduction
+   setting, forced-colors mode — backdrop-filter is exactly the kind of
+   effect those turn off silently), the fix is to stop treating blur as
+   the thing that makes this legible. The background tint alone is now
+   opaque enough on its own to read cleanly with zero blur; backdrop-filter
+   stays on as a pure enhancement for browsers where it renders, never
+   load-bearing for legibility. */
 .screen-context-panel {
   position: absolute;
   inset: 0;
@@ -205,9 +201,9 @@
   justify-content: center;
   overflow-y: auto;
   padding: clamp(1.5rem, 4vw, 3rem);
-  background: rgba(10, 9, 14, 0.6);
-  backdrop-filter: blur(40px) saturate(160%);
-  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  background: rgba(8, 7, 12, 0.88);
+  backdrop-filter: blur(60px) saturate(160%);
+  -webkit-backdrop-filter: blur(60px) saturate(160%);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--dur-med) var(--ease-premium);
@@ -218,13 +214,21 @@
   pointer-events: auto;
 }
 
-.screen-context-text {
-  position: relative;
-  z-index: 1;
+.screen-context-inner {
   max-width: 34rem;
   width: 100%;
   margin: 0 auto;
   text-align: left;
+}
+
+.screen-context-eyebrow {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.screen-context-text {
+  position: relative;
+  z-index: 1;
   font-size: 1rem;
   line-height: 1.6;
   color: var(--ink);

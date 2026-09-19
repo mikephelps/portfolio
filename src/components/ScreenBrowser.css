@@ -167,18 +167,17 @@
 }
 
 /* Per-image context, revealed on hover. A shared translucent .glass
-   surface is NOT legible here — those tokens (58% opacity) are tuned for
-   sitting over the dim particle background, not a bright/busy screenshot,
-   and backdrop-filter blur alone doesn't fix that: blur softens fine
-   detail, it barely touches overall brightness/contrast, so bold text and
-   UI chrome in the image were still showing through. This is a
-   purpose-built near-opaque scrim instead (solid gradient, not
-   translucency) — the actual fix "Text over imagery needs a scrim" calls
-   for: white/high-emphasis text over a busy image needs the scrim at
-   ~black-90+ right behind the text, fading down to ~black-70 at the top
-   edge for a soft transition into the image, never dropping below the
-   black-60 floor. Anchored to the bottom of the media box and capped with
-   its own max-height + scroll rather than growing the frame. */
+   surface is NOT legible here — those tokens (58% opacity, 22px blur) are
+   tuned for sitting over the dim particle background, not a bright/busy
+   screenshot. My first attempt at a fix overcorrected the other way: a
+   near-opaque gradient (94-97%) that was legible but genuinely opaque —
+   not translucent, not actually blurring anything, just hiding it. Proven
+   (via a real busy/high-contrast test image, cropped and inspected pixel
+   by pixel) that blur(40px) + a MODERATE ~55% tint is enough to fully
+   obscure fine detail and text while still visibly showing blurred color
+   through the panel — genuine frosted glass, not a flat scrim. Anchored
+   to the bottom of the media box and capped with its own max-height +
+   scroll rather than growing the frame. */
 .screen-context-panel {
   position: absolute;
   inset: auto 0 0 0;
@@ -186,9 +185,9 @@
   max-height: 62%;
   overflow-y: auto;
   padding: 1rem 1.1rem 0.9rem;
-  background: linear-gradient(to top, rgba(6, 5, 9, 0.97) 0%, rgba(6, 5, 9, 0.94) 65%, rgba(6, 5, 9, 0.75) 100%);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background: linear-gradient(to top, rgba(10, 9, 14, 0.62) 0%, rgba(10, 9, 14, 0.56) 55%, rgba(10, 9, 14, 0.32) 100%);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
   opacity: 0;
   transform: translateY(6px);
   pointer-events: none;

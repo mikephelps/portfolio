@@ -6,6 +6,15 @@
   position: relative;
 }
 
+/* Breathing room around the divider between cases. This has to live on
+   the frame (which only affects where it starts in document flow) rather
+   than as top padding on .client-case (the pinned child) — padding there
+   would push the pinned content down inside its fixed viewport window and
+   clip the browser panel, same issue as before. */
+.client-case-frame + .client-case-frame {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
 .client-case-sticky {
   position: sticky;
   top: 96px;

@@ -7,7 +7,7 @@ import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./About.css";
 
 const stats = [
-  { value: "7+", label: "Years leading product design" },
+  { value: "15+", label: "Years in web design & strategy" },
   { value: "30+", label: "Shipped products" },
   { value: "2", label: "Disciplines, one craft" },
 ];
@@ -38,12 +38,12 @@ export default function About() {
 
           <Reveal delay={0.18}>
             <p className="about-body">
-              My work spans product strategy, interaction design, and the
-              design systems that hold it all together, and I partner closely
-              with engineering to make sure what ships matches the intent.
-              A background in front-end development means I can prototype in
-              code, hand off systems that hold up under real constraints, and
-              build the thing myself when that's faster than the round trip.
+              My work spans web and product strategy, interaction design, and
+              the design systems that hold it together, and I partner closely
+              with engineering so what ships matches the intent — prototyping
+              in code, handing off systems that hold up under real
+              constraints, and building the thing myself when that's faster
+              than the round trip.
             </p>
           </Reveal>
 

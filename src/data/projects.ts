@@ -1,13 +1,5 @@
 import type { ComponentType } from "react";
-import {
-  IconBolt,
-  IconCompass,
-  IconImage,
-  IconLayers,
-  IconLayout,
-  IconSliders,
-  IconWindow,
-} from "../components/Icons";
+import { IconBolt, IconCompass, IconLayout, IconLinkedin } from "../components/Icons";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -31,58 +23,46 @@ export type ClientProject = {
   Icon: IconType;
 };
 
+// Placeholder screen list shared until real screenshots are ready for each
+// project — one zone so the browser still renders (and pins/scrubs) with
+// something in it rather than an empty state.
+const tbdScreens: Screen[] = [{ id: "tbd", label: "Tab sections TBD", Icon: IconLayout }];
+
 export const clientProjects: ClientProject[] = [
   {
-    id: "aperture",
+    id: "linkedin",
     index: "01",
-    year: "2025",
-    title: "Aperture Analytics",
-    role: "Lead product designer, front-end build",
+    year: "2025-Current",
+    title: "LinkedIn",
+    role: "Senior UX Designer",
     description:
-      "A real-time analytics dashboard for creative teams. I led research and interaction design, built the design system, and shipped the front end myself — down to the chart transition timing.",
-    tech: ["Figma", "Design systems", "React", "TypeScript", "D3.js"],
-    link: "#",
-    repo: "#",
-    Icon: IconLayers,
-    screens: [
-      { id: "overview", label: "Dashboard overview", Icon: IconLayout },
-      { id: "chart", label: "Live chart detail", Icon: IconSliders },
-      { id: "workspace", label: "Team workspace", Icon: IconWindow },
-      { id: "mobile", label: "Mobile view", Icon: IconImage },
-    ],
+      "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
+    tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
+    Icon: IconLinkedin,
+    screens: tbdScreens,
   },
   {
-    id: "northwind",
+    id: "roboro",
     index: "02",
-    year: "2024",
-    title: "Northwind Commerce",
-    role: "UX lead, design systems",
+    year: "2025",
+    title: "Roboro",
+    role: "Web/Product Designer",
     description:
-      "A headless commerce storefront and the component library behind it — built for speed, with motion-first micro-interactions on top of a strict performance budget.",
-    tech: ["Product strategy", "Design systems", "Next.js", "Framer Motion"],
-    link: "#",
+      "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
+    tech: ["Figma", "Design Systems", "Framer", "Animation"],
     Icon: IconBolt,
-    screens: [
-      { id: "home", label: "Storefront home", Icon: IconWindow },
-      { id: "product", label: "Product detail", Icon: IconImage },
-    ],
+    screens: tbdScreens,
   },
   {
-    id: "orbit",
+    id: "visier",
     index: "03",
-    year: "2023",
-    title: "Orbit Studio",
-    role: "Solo designer & builder",
+    year: "2021-2025",
+    title: "Visier",
+    role: "Lead UI/UX Designer",
     description:
-      "A WebGL product configurator that lets users customize a physical product in real time, tweak materials, and export a shareable render — concept through code.",
-    tech: ["User research", "Prototyping", "Three.js", "React"],
-    repo: "#",
+      "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
+    tech: ["Figma", "Design Systems", "Product UI", "Animation"],
     Icon: IconCompass,
-    screens: [
-      { id: "configurator", label: "Configurator UI", Icon: IconSliders },
-      { id: "render", label: "Render export", Icon: IconImage },
-      { id: "materials", label: "Material picker", Icon: IconLayout },
-      { id: "share", label: "Share flow", Icon: IconWindow },
-    ],
+    screens: tbdScreens,
   },
 ];

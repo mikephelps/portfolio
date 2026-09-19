@@ -40,9 +40,9 @@ export default function Hero() {
         </h1>
 
         <motion.p className="hero-sub" variants={fadeUpItem}>
-          I lead end-to-end product design — research, systems, and interface
-          craft — and build the front end myself when it counts, so nothing
-          gets lost in translation.
+          I lead end-to-end web & product design, do the research, build
+          systems with interface craft, and build the front end myself when
+          it counts, so nothing gets lost in translation.
         </motion.p>
 
         <motion.div className="hero-actions" variants={fadeUpItem}>

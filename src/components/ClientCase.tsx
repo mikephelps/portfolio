@@ -13,6 +13,11 @@ type ClientCaseProps = {
 const headerStagger = staggerContainer(0.09);
 const chipStagger = staggerContainer(0.045);
 
+// Live-site/source links are hidden for now (real client work under NDA-ish
+// constraints) but the markup stays in place — flip this back on whenever
+// there are links worth showing again.
+const SHOW_PROJECT_LINKS = false;
+
 // How much extra scroll distance (in viewport-heights) each screen gets
 // while the case is pinned. Larger = a slower, more deliberate scrub
 // through the screens before the page is allowed to continue scrolling.
@@ -120,20 +125,22 @@ export default function ClientCase({ project }: ClientCaseProps) {
               ))}
             </motion.ul>
 
-            <motion.div className="client-case-links" variants={fadeUpItem}>
-              {project.link && (
-                <a href={project.link} className="client-case-link">
-                  <span>Live site</span>
-                  <IconArrowUpRight size={16} />
-                </a>
-              )}
-              {project.repo && (
-                <a href={project.repo} className="client-case-link">
-                  <IconGithub size={16} />
-                  <span>Source</span>
-                </a>
-              )}
-            </motion.div>
+            {SHOW_PROJECT_LINKS && (
+              <motion.div className="client-case-links" variants={fadeUpItem}>
+                {project.link && (
+                  <a href={project.link} className="client-case-link">
+                    <span>Live site</span>
+                    <IconArrowUpRight size={16} />
+                  </a>
+                )}
+                {project.repo && (
+                  <a href={project.repo} className="client-case-link">
+                    <IconGithub size={16} />
+                    <span>Source</span>
+                  </a>
+                )}
+              </motion.div>
+            )}
           </motion.div>
 
           <ScreenBrowser

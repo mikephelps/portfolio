@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { IconArrowUpRight } from "../components/Icons";
 import { easePremium, fadeUpItem, staggerContainer } from "../lib/motion";
-import portraitImg from "../assets/portrait.webp";
+import HeroPortrait from "./HeroPortrait";
 import "./Hero.css";
 
 const headline = ["Mike", "Phelps"];
@@ -56,22 +56,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.div
-        className="hero-portrait"
-        initial={{ opacity: 0, y: 24, scale: 0.96 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5, ease: easePremium }}
-      >
-        <div className="hero-portrait-glow" aria-hidden="true" />
-        <div className="hero-portrait-frame">
-          <img
-            src={portraitImg}
-            alt="Portrait of Mike Phelps"
-            className="hero-portrait-img"
-          />
-          <div className="hero-portrait-overlay" aria-hidden="true" />
-        </div>
-      </motion.div>
+      <HeroPortrait />
 
       <motion.a
         href="#about"

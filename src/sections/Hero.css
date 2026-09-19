@@ -28,6 +28,17 @@
   background: radial-gradient(circle at 55% 35%, var(--accent-glow), transparent 62%);
   filter: blur(24px);
   z-index: -1;
+  transition:
+    transform var(--dur-med) var(--ease-premium),
+    opacity var(--dur-med) var(--ease-premium);
+}
+
+/* Bloom the ambient glow while the portrait is being interacted with — the
+   glow div sits after .hero-portrait-frame in the DOM (z-index:-1 keeps it
+   rendering behind) purely so this plain sibling selector can reach it. */
+.hero-portrait-frame:hover ~ .hero-portrait-glow {
+  transform: scale(1.2);
+  opacity: 1;
 }
 
 .hero-portrait-frame {
@@ -37,16 +48,48 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.6);
+  --spot-x: 50%;
+  --spot-y: 50%;
+}
+
+/* Shifted as one unit by a spring-damped transform (see HeroPortrait.tsx)
+   for the "magnetic pull toward the cursor" feel. */
+.hero-portrait-shift {
+  position: absolute;
+  inset: 0;
 }
 
 .hero-portrait-img {
   display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 20%;
   opacity: 0.6;
   filter: grayscale(100%) contrast(1.12) brightness(0.55);
+  transition: opacity var(--dur-med) var(--ease-premium);
+}
+
+.hero-portrait-frame:hover .hero-portrait-img {
+  opacity: 0.8;
+}
+
+/* The color-reveal spotlight: a full-color copy of the same image, masked
+   to a soft circle that tracks the cursor exactly (see --spot-x/--spot-y,
+   set directly on pointer move). Invisible at rest; fades in on hover so
+   the reveal only ever appears as a deliberate, cursor-driven effect. */
+.hero-portrait-img--bright {
+  opacity: 0;
+  filter: contrast(1.05) saturate(1.05) brightness(0.9);
+  mask-image: radial-gradient(circle 170px at var(--spot-x) var(--spot-y), black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 170px at var(--spot-x) var(--spot-y), black 0%, transparent 100%);
+  transition: opacity var(--dur-fast) var(--ease-premium);
+}
+
+.hero-portrait-frame:hover .hero-portrait-img--bright {
+  opacity: 0.95;
 }
 
 .hero-portrait-overlay {
@@ -76,9 +119,11 @@
   }
 
   .hero-portrait {
-    width: min(260px, 58vw);
+    order: -1;
+    width: min(148px, 38vw);
+    aspect-ratio: 1 / 1;
     align-self: flex-start;
-    margin-top: 2.6rem;
+    margin-bottom: 1.8rem;
   }
 }
 

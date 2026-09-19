@@ -25,6 +25,15 @@
   color: var(--accent);
 }
 
+/* Small and dim relative to the label above it, so the label still reads
+   as the heading and this stays clearly secondary context. */
+.screen-stack-description {
+  margin: -0.5rem 0 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
 /* Generous, legible image height — the old tabbed layout's images got
    squeezed short to fit everything above the fold while pinned; nothing
    pins on mobile anymore, so there's no reason not to give each one room. */

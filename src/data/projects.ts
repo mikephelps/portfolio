@@ -25,6 +25,10 @@ export type Screen = {
   label: string;
   Icon: IconType;
   media?: ScreenMedia;
+  // A short paragraph of context for this specific image/video — shown on
+  // hover (desktop) or under the label (mobile). See ScreenBrowser.tsx /
+  // ScreenStack.tsx.
+  description?: string;
 };
 
 export type ClientProject = {
@@ -44,7 +48,14 @@ export type ClientProject = {
 // Placeholder screen list shared until real screenshots are ready for each
 // project — one zone so the browser still renders (and pins/scrubs) with
 // something in it rather than an empty state.
-const tbdScreens: Screen[] = [{ id: "tbd", label: "Tab sections TBD", Icon: IconLayout }];
+const tbdScreens: Screen[] = [
+  {
+    id: "tbd",
+    label: "Tab sections TBD",
+    Icon: IconLayout,
+    description: "Description TBD — a short paragraph of context for this image will go here.",
+  },
+];
 
 export const clientProjects: ClientProject[] = [
   {
@@ -94,10 +105,30 @@ export const clientProjects: ClientProject[] = [
     tech: ["Illustrator", "Figma", "Framer", "HTML", "CSS"],
     Icon: IconLayers,
     screens: [
-      { id: "atlantic-brand", label: "Atlantic's Brand", Icon: IconImage },
-      { id: "atlantic-web", label: "Atlantic's Web", Icon: IconWindow },
-      { id: "shared-beginnings-brand", label: "Shared Beginnings' Brand", Icon: IconImage },
-      { id: "shared-beginnings-web", label: "Shared Beginnings' Web", Icon: IconWindow },
+      {
+        id: "atlantic-brand",
+        label: "Atlantic's Brand",
+        Icon: IconImage,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
+      {
+        id: "atlantic-web",
+        label: "Atlantic's Web",
+        Icon: IconWindow,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
+      {
+        id: "shared-beginnings-brand",
+        label: "Shared Beginnings' Brand",
+        Icon: IconImage,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
+      {
+        id: "shared-beginnings-web",
+        label: "Shared Beginnings' Web",
+        Icon: IconWindow,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
     ],
   },
 ];

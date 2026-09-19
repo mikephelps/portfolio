@@ -36,6 +36,7 @@ export default function ScreenStack({ idPrefix, screens }: ScreenStackProps) {
             </span>
             <span>{screen.label}</span>
           </div>
+          {screen.description && <p className="screen-stack-description">{screen.description}</p>}
           <div className="screen-frame glass">
             <div className="screen-frame-media">
               <ScreenFrameMedia screen={screen} />

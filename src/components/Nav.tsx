@@ -40,9 +40,6 @@ export default function Nav() {
                         transition={{ type: "spring", stiffness: 420, damping: 36 }}
                       />
                     )}
-                    {isActive && hoveredId !== item.id && (
-                      <span className="nav-link-dot" aria-hidden="true" />
-                    )}
                     <span className="nav-link-icon">
                       <item.Icon size={15} />
                     </span>

@@ -101,6 +101,11 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
             </div>
             <div className="screen-frame-media">
               <ScreenFrameMedia screen={active} />
+              {active.description && (
+                <div className="screen-context-panel glass glass-strong">
+                  <p className="screen-context-text">{active.description}</p>
+                </div>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>

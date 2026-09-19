@@ -84,14 +84,14 @@ export const clientProjects: ClientProject[] = [
         id: "color-tokens",
         label: "Design System: Color Tokens",
         Icon: IconSliders,
-        media: { type: "image", src: linkedinColorTokensImg, position: "top" },
+        media: { type: "image", src: linkedinColorTokensImg, fit: "contain" },
         description: "Created the design system foundations including full color token architecture.",
       },
       {
         id: "components",
         label: "Design System: Components",
         Icon: IconLayout,
-        media: { type: "image", src: linkedinComponentsImg, position: "top" },
+        media: { type: "image", src: linkedinComponentsImg, fit: "contain" },
         description:
           "Built all new, custom components in Figma including: heroes, cards, features, banners, etc.",
       },

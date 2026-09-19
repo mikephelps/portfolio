@@ -11,6 +11,9 @@ import {
 } from "../components/Icons";
 import linkedinColorTokensImg from "../assets/screens/linkedin-color-tokens.png";
 import linkedinComponentsImg from "../assets/screens/linkedin-components.png";
+import linkedinAiWorkflowImg from "../assets/screens/linkedin-ai-workflow.png";
+import linkedinAemTokensComponentsImg from "../assets/screens/linkedin-aem-tokens-components.png";
+import linkedinAemCodeSeoImg from "../assets/screens/linkedin-aem-code-seo.png";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -97,19 +100,24 @@ export const clientProjects: ClientProject[] = [
         id: "ai-workflow",
         label: "AI Workflow & Design System",
         Icon: IconBolt,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "image", src: linkedinAiWorkflowImg },
+        description:
+          "Connected Claude and GitHub Copilot into the Figma-to-Adobe pipeline, introducing an AI-assisted workflow for building and maintaining the design system.",
       },
       {
         id: "aem-tokens-components",
         label: "AEM: Custom Tokens & Components",
         Icon: IconLayers,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "image", src: linkedinAemTokensComponentsImg },
+        description: "Extended the token architecture into AEM and built custom components, like this accordion, on top of it.",
       },
       {
         id: "aem-code-seo",
         label: "AEM: Custom Code & SEO",
         Icon: IconWindow,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "image", src: linkedinAemCodeSeoImg },
+        description:
+          "Hand-coded custom AEM components and structured data (JSON-LD schema) to support SEO and AI discovery tools.",
       },
     ],
   },

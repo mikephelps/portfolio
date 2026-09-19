@@ -77,7 +77,7 @@
 
   .hero-portrait {
     width: min(260px, 58vw);
-    align-self: center;
+    align-self: flex-start;
     margin-top: 2.6rem;
   }
 }

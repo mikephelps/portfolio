@@ -10,6 +10,16 @@
   pointer-events: none;
 }
 
+/* Navigation has to stay legible over literally anything scrolled behind
+   it — busy text, bright images, the particle field — so it gets its own
+   near-opaque background instead of the subtler shared --glass-bg tokens
+   (those are tuned for decorative cards, where some see-through blur is
+   the point). backdrop-filter still softens whatever sliver shows through. */
+.nav.glass,
+.nav-mobile.glass {
+  background: rgba(8, 7, 12, 0.94);
+}
+
 .nav {
   pointer-events: auto;
   display: flex;

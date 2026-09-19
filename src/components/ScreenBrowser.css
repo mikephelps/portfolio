@@ -142,21 +142,11 @@
   color: var(--ink-faint);
 }
 
-@media (max-width: 860px) {
-  .screen-browser {
-    grid-template-columns: 1fr;
-  }
+/* ScreenBrowser (the tabbed, scroll-pinned scrub UI) only ever renders on
+   desktop now — mobile uses ScreenStack, a plain scrolling list — so no
+   narrow-viewport override is needed here.
 
-  .screen-zone {
-    height: 48px;
-  }
-
-  .screen-frame-media {
-    aspect-ratio: 16 / 7;
-  }
-}
-
-/* Shorter viewports need the whole pinned card (header + browser) to fit
+   Shorter viewports need the whole pinned card (header + browser) to fit
    without clipping — see ClientCase.css. Shrinking the media panel's
    aspect ratio and the list's row height buys back the vertical room. */
 @media (max-height: 820px) {

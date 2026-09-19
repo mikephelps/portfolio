@@ -1,0 +1,33 @@
+.screen-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 8vw, 2.8rem);
+}
+
+.screen-stack-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-stack-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.screen-stack-icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+/* Generous, legible image height — the old tabbed layout's images got
+   squeezed short to fit everything above the fold while pinned; nothing
+   pins on mobile anymore, so there's no reason not to give each one room. */
+.screen-stack-item .screen-frame-media {
+  aspect-ratio: 4 / 3;
+}

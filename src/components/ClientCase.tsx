@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { animate, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import ScreenBrowser from "./ScreenBrowser";
+import ScreenStack from "./ScreenStack";
 import { IconArrowUpRight, IconGithub } from "./Icons";
 import type { ClientProject } from "../data/projects";
-import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
+import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ClientCase.css";
 
 type ClientCaseProps = {
@@ -23,13 +24,12 @@ const SHOW_PROJECT_LINKS = false;
 // through the screens before the page is allowed to continue scrolling.
 const VH_PER_SCREEN = 90;
 
-// Pinning (scroll-jacking) a whole card is a desktop pattern — on a phone
-// there usually isn't room for header + tech chips + a 4-item list + panel
-// to all fit on-screen at once no matter how compact, and stacking that
-// tall content inside a hidden spacer without pinning it would just leave
-// a dead scroll gap. So on narrow viewports the case renders in normal
-// flow (no spacer, no sticky) and the highlight still tracks scroll — just
-// over the content's own natural height instead of a held scrub zone.
+// Pinning (scroll-jacking) a whole card, and the tabbed scrub UI it holds,
+// are a desktop pattern — on a phone there usually isn't room for header +
+// tech chips + a tabbed list + panel to all fit on-screen at once no
+// matter how compact. So on narrow viewports the case renders in normal
+// flow (no spacer, no sticky) and every screen is just shown in a plain
+// scrolling stack (see ScreenStack) instead of a tap-to-switch panel.
 function useCompactLayout() {
   const [compact, setCompact] = useState(() => window.matchMedia("(max-width: 860px)").matches);
   useEffect(() => {
@@ -54,12 +54,7 @@ export default function ClientCase({ project }: ClientCaseProps) {
     target: frameRef,
     offset: ["start start", "end end"],
   });
-  const rawIndexScroll = useTransform(scrollYProgress, (p) => p * project.screens.length);
-  // Compact/mobile has no pin and no held scrub zone to derive a scroll
-  // fraction from, so the highlight there is driven directly by taps
-  // instead — this motion value is just animated to the tapped index.
-  const rawIndexManual = useMotionValue(0);
-  const rawIndex = compact ? rawIndexManual : rawIndexScroll;
+  const rawIndex = useTransform(scrollYProgress, (p) => p * project.screens.length);
 
   const [activeIndex, setActiveIndex] = useState(0);
   useMotionValueEvent(rawIndex, "change", (v) => {
@@ -67,13 +62,6 @@ export default function ClientCase({ project }: ClientCaseProps) {
   });
 
   const handleSelect = (index: number) => {
-    if (compact) {
-      // Land just under the next integer so this item reads as "active"
-      // (fully filled) rather than "completed" (which needs activeIndex
-      // to have advanced past it) — see the isCompleted check below.
-      animate(rawIndexManual, index + 0.999, { duration: 0.6, ease: easePremium });
-      return;
-    }
     const el = frameRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -143,14 +131,18 @@ export default function ClientCase({ project }: ClientCaseProps) {
             )}
           </motion.div>
 
-          <ScreenBrowser
-            idPrefix={project.id}
-            title={project.title}
-            screens={project.screens}
-            rawIndex={rawIndex}
-            activeIndex={activeIndex}
-            onSelect={handleSelect}
-          />
+          {compact ? (
+            <ScreenStack idPrefix={project.id} screens={project.screens} />
+          ) : (
+            <ScreenBrowser
+              idPrefix={project.id}
+              title={project.title}
+              screens={project.screens}
+              rawIndex={rawIndex}
+              activeIndex={activeIndex}
+              onSelect={handleSelect}
+            />
+          )}
         </div>
       </div>
     </article>

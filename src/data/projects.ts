@@ -30,8 +30,44 @@ const tbdScreens: Screen[] = [{ id: "tbd", label: "Tab sections TBD", Icon: Icon
 
 export const clientProjects: ClientProject[] = [
   {
-    id: "atlantic-shared-beginnings",
+    id: "linkedin",
     index: "01",
+    year: "2025-Current",
+    title: "LinkedIn",
+    role: "Senior UX Designer",
+    description:
+      "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
+    tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
+    Icon: IconLinkedin,
+    screens: tbdScreens,
+  },
+  {
+    id: "roboro",
+    index: "02",
+    year: "2025",
+    title: "Roboro",
+    role: "Web/Product Designer",
+    description:
+      "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
+    tech: ["Figma", "Design Systems", "Framer", "Animation"],
+    Icon: IconBolt,
+    screens: tbdScreens,
+  },
+  {
+    id: "visier",
+    index: "03",
+    year: "2021-2025",
+    title: "Visier",
+    role: "Lead UI/UX Designer",
+    description:
+      "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
+    tech: ["Figma", "Design Systems", "Product UI", "Animation"],
+    Icon: IconCompass,
+    screens: tbdScreens,
+  },
+  {
+    id: "atlantic-shared-beginnings",
+    index: "04",
     year: "2025",
     title: "Atlantic Fertility & Shared Beginnings",
     role: "Lead Designer & Developer",
@@ -45,41 +81,5 @@ export const clientProjects: ClientProject[] = [
       { id: "shared-beginnings-brand", label: "Shared Beginnings' Brand", Icon: IconImage },
       { id: "shared-beginnings-web", label: "Shared Beginnings' Web", Icon: IconWindow },
     ],
-  },
-  {
-    id: "linkedin",
-    index: "02",
-    year: "2025-Current",
-    title: "LinkedIn",
-    role: "Senior UX Designer",
-    description:
-      "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
-    tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
-    Icon: IconLinkedin,
-    screens: tbdScreens,
-  },
-  {
-    id: "roboro",
-    index: "03",
-    year: "2025",
-    title: "Roboro",
-    role: "Web/Product Designer",
-    description:
-      "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
-    tech: ["Figma", "Design Systems", "Framer", "Animation"],
-    Icon: IconBolt,
-    screens: tbdScreens,
-  },
-  {
-    id: "visier",
-    index: "04",
-    year: "2021-2025",
-    title: "Visier",
-    role: "Lead UI/UX Designer",
-    description:
-      "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
-    tech: ["Figma", "Design Systems", "Product UI", "Animation"],
-    Icon: IconCompass,
-    screens: tbdScreens,
   },
 ];

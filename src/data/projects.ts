@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
   IconBolt,
+  IconCalendar,
   IconCompass,
   IconImage,
   IconLayers,
@@ -14,6 +15,11 @@ import linkedinComponentsImg from "../assets/screens/linkedin-components.png";
 import linkedinAiWorkflowImg from "../assets/screens/linkedin-ai-workflow.png";
 import linkedinAemTokensComponentsImg from "../assets/screens/linkedin-aem-tokens-components.png";
 import linkedinAemCodeSeoImg from "../assets/screens/linkedin-aem-code-seo.png";
+import roboroBrandingImg from "../assets/screens/roboro-branding.png";
+import roboroWebsiteHeroImg from "../assets/screens/roboro-website-hero.png";
+import roboroLandingPageVideo from "../assets/screens/roboro-landing-page.mp4";
+import roboroBillsImg from "../assets/screens/roboro-bills.png";
+import roboroCalendarImg from "../assets/screens/roboro-calendar.png";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -131,7 +137,43 @@ export const clientProjects: ClientProject[] = [
       "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
     tech: ["Figma", "Design Systems", "Framer", "Animation"],
     Icon: IconBolt,
-    screens: tbdScreens,
+    screens: [
+      {
+        id: "branding",
+        label: "Logo & Branding",
+        Icon: IconImage,
+        media: { type: "image", src: roboroBrandingImg },
+        description: "Designed Roboro's brand identity from the ground up, including the logo mark and a full color token system.",
+      },
+      {
+        id: "website-design-build",
+        label: "Website Design & Build",
+        Icon: IconLayout,
+        media: { type: "image", src: roboroWebsiteHeroImg },
+        description: "Designed and built the marketing site's hero section, from Figma concept through production-ready code.",
+      },
+      {
+        id: "website-landing-page",
+        label: "Website Landing Page",
+        Icon: IconWindow,
+        media: { type: "video", src: roboroLandingPageVideo },
+        description: "The finished landing page live in the browser, showcasing Roboro's real-time legislative alerts.",
+      },
+      {
+        id: "product-bills",
+        label: "Product Design: Bills",
+        Icon: IconSliders,
+        media: { type: "image", src: roboroBillsImg },
+        description: "Designed the bill-tracking interface, surfacing priority, sponsors, and status at a glance across every tracked bill.",
+      },
+      {
+        id: "product-calendar",
+        label: "Product Design: Calendar",
+        Icon: IconCalendar,
+        media: { type: "image", src: roboroCalendarImg },
+        description: "Designed the legislative calendar, giving users a clear view of upcoming and past committee events and bill actions.",
+      },
+    ],
   },
   {
     id: "visier",

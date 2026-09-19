@@ -145,6 +145,16 @@ export function IconLayout({ size = 18, strokeWidth = 1.6 }: IconProps) {
   );
 }
 
+export function IconCalendar({ size = 18, strokeWidth = 1.6 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <rect x="3.5" y="5" width="17" height="15" rx="2" />
+      <path d="M3.5 9.5h17" />
+      <path d="M8 3.2v3.6M16 3.2v3.6" />
+    </svg>
+  );
+}
+
 export function IconSearch({ size = 18, strokeWidth = 1.8 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>

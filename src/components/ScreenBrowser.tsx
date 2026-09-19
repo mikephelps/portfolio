@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import type { Screen } from "../data/projects";
-import { useActiveIndexByPosition } from "../hooks/useActiveIndexByPosition";
+import { ACTIVE_TRIGGER_FRACTION, useActiveIndexByPosition } from "../hooks/useActiveIndexByPosition";
 import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
 
@@ -35,14 +35,19 @@ function ScreenListItem({ screen, itemId, isActive, onSelect }: ScreenListItemPr
 
   // Width tracks the real scroll position while this item isn't the active
   // one — that's the "highlighter sweeping across as you scroll" effect.
-  // Once it becomes active (by scroll or by a click jump), spring it to a
-  // full sweep so the highlight always reads as complete for the current
-  // item, then hand control back to the scroll position when it isn't.
+  // Once it becomes active (by scroll or by a click jump), animate it to a
+  // full, deliberate ~1.5s sweep — not an instant snap — then hand control
+  // back to the scroll position once it isn't active any more.
   useEffect(() => {
     if (isActive) {
-      const controls = animate(progress, 1, { type: "spring", stiffness: 300, damping: 32 });
+      const controls = animate(progress, 1, { duration: 1.5, ease: easePremium });
       return () => controls.stop();
     }
+    // Resync immediately rather than waiting for the next scroll event —
+    // otherwise an item that just went from active to inactive stays stuck
+    // showing a full purple (not yet-recomputed) sweep until something
+    // happens to nudge scrollYProgress again.
+    progress.set(scrollYProgress.get());
     const unsubscribe = scrollYProgress.on("change", (v) => progress.set(v));
     return unsubscribe;
   }, [isActive, progress, scrollYProgress]);
@@ -53,19 +58,13 @@ function ScreenListItem({ screen, itemId, isActive, onSelect }: ScreenListItemPr
   }, [progress]);
 
   const fillWidth = useTransform(progress, (v) => `${v * 100}%`);
-  // The lit-up copy of the label is clipped to exactly the swept width, so
-  // the text itself brightens left-to-right in sync with the highlighter
-  // bar underneath it, instead of snapping bright the instant it's active.
-  const labelClip = useTransform(progress, (v) => `inset(0 ${(1 - v) * 100}% 0 0)`);
   const isCompleted = visited && !isActive;
 
   return (
     <motion.li ref={ref} id={itemId} className="screen-list-item" variants={fadeUpItem}>
       <button
         type="button"
-        className={`screen-list-btn ${isActive ? "screen-list-btn--active" : ""} ${
-          isCompleted ? "screen-list-btn--completed" : ""
-        }`}
+        className={`screen-list-btn ${isCompleted ? "screen-list-btn--completed" : ""}`}
         onClick={() => onSelect(itemId)}
       >
         <motion.span
@@ -75,12 +74,7 @@ function ScreenListItem({ screen, itemId, isActive, onSelect }: ScreenListItemPr
         <span className="screen-list-icon">
           <screen.Icon size={15} />
         </span>
-        <span className="screen-list-label-wrap">
-          <span className="screen-list-label">{screen.label}</span>
-          <motion.span className="screen-list-label screen-list-label--lit" style={{ clipPath: labelClip }}>
-            {screen.label}
-          </motion.span>
-        </span>
+        <span className="screen-list-label">{screen.label}</span>
       </button>
     </motion.li>
   );
@@ -100,18 +94,43 @@ export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowse
     return () => clearTimeout(timeout);
   }, [scrollSpyId]);
 
-  // A click still wins immediately rather than waiting on the debounce or
-  // on the scroll it triggers to settle.
+  // A click wins immediately rather than waiting on the debounce. It has to
+  // stay in charge until the smooth scroll it triggers actually finishes —
+  // clearing on a fixed timeout let the position-based hook recompute mid
+  // -scroll (still settling toward the target) and occasionally land on
+  // the wrong item. `scrollend` clears it precisely; the timeout is only a
+  // fallback for browsers that don't support that event.
   const [override, setOverride] = useState<string | null>(null);
-  const overrideTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const overrideCleanup = useRef<() => void>(undefined);
   const activeId = override ?? settledSpyId;
   const active = screens.find((screen) => `${idPrefix}-${screen.id}` === activeId) ?? screens[0];
 
   const handleSelect = (id: string) => {
+    overrideCleanup.current?.();
     setOverride(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
-    clearTimeout(overrideTimeout.current);
-    overrideTimeout.current = setTimeout(() => setOverride(null), 800);
+
+    // scrollIntoView's block:"center" targets 50% of the viewport, but the
+    // active-position hook's trigger line sits at ACTIVE_TRIGGER_FRACTION —
+    // for a short list that mismatch can leave every item's center closer
+    // to a later item than the one actually clicked once the scroll
+    // settles. Scroll to the exact position that lands this item's center
+    // on the trigger line instead, so it's unambiguously the closest one.
+    const el = document.getElementById(id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const elCenter = rect.top + rect.height / 2;
+      const triggerY = window.innerHeight * ACTIVE_TRIGGER_FRACTION;
+      window.scrollTo({ top: window.scrollY + (elCenter - triggerY), behavior: "smooth" });
+    }
+
+    const timeout = setTimeout(clear, 1600);
+    function clear() {
+      setOverride(null);
+      clearTimeout(timeout);
+      window.removeEventListener("scrollend", clear);
+    }
+    window.addEventListener("scrollend", clear);
+    overrideCleanup.current = clear;
   };
 
   return (
@@ -144,7 +163,7 @@ export default function ScreenBrowser({ idPrefix, title, screens }: ScreenBrowse
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.4, ease: easePremium }}
+            transition={{ duration: 0.55, ease: easePremium }}
             className="screen-frame glass"
           >
             <div className="screen-frame-bar">

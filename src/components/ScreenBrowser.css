@@ -8,38 +8,36 @@
 .screen-list {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 1.5rem;
 }
 
 .screen-list-item {
   position: relative;
 }
 
+/* The highlighter sweep: a narrow, text-hugging marker bar — not a padded
+   button — that grows behind the text as you scroll past it, like
+   literally highlighting the line with a pen. It fills over ~1.5s the
+   moment this item becomes "active" (by scroll or by a click jump), then
+   settles to a muted gray once you've moved on — that gray + dimmed text
+   together read as "completed". Not-yet-reached items are plain white
+   text with no background at all. */
 .screen-list-btn {
   position: relative;
-  width: 100%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.7rem 0.85rem;
-  border-radius: 6px;
+  gap: 0.55rem;
+  margin-left: -0.4rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
   text-align: left;
   background: none;
   border: none;
-  color: var(--ink-faint);
-  font-size: 0.92rem;
+  color: var(--ink);
+  font-size: 0.95rem;
   overflow: hidden;
 }
 
-.screen-list-btn:hover {
-  color: var(--ink-dim);
-}
-
-/* The highlighter sweep: a solid marker-style bar that grows behind the
-   text as you scroll past it, like literally highlighting the line. It
-   snaps to a full sweep the moment this item becomes "active" (by scroll
-   or by a click jump), then settles to a muted gray once you've moved on
-   — that gray + dimmed text together read as "completed". */
 .screen-list-highlight {
   position: absolute;
   inset: 0;
@@ -50,48 +48,29 @@
 }
 
 .screen-list-highlight--completed {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.screen-list-icon,
+.screen-list-label {
+  position: relative;
+  transition: opacity var(--dur-fast) var(--ease-premium);
 }
 
 .screen-list-icon {
-  position: relative;
   display: grid;
   place-items: center;
   flex-shrink: 0;
   color: inherit;
-  transition: color var(--dur-fast) var(--ease-premium);
-}
-
-.screen-list-btn--active .screen-list-icon {
-  color: var(--ink);
-}
-
-/* Two copies of the label stacked exactly on top of each other: a muted
-   base, and a bright copy clipped to the swept width so the text itself
-   lights up left-to-right in sync with the highlighter bar, rather than
-   snapping bright all at once. */
-.screen-list-label-wrap {
-  position: relative;
-  display: inline-block;
 }
 
 .screen-list-label {
-  color: var(--ink-faint);
   white-space: nowrap;
 }
 
-.screen-list-label--lit {
-  position: absolute;
-  inset: 0;
-  color: var(--ink);
-}
-
-.screen-list-btn--completed .screen-list-icon {
-  color: var(--ink-dim);
-}
-
-.screen-list-btn--completed .screen-list-label-wrap {
-  opacity: 0.68;
+.screen-list-btn--completed .screen-list-icon,
+.screen-list-btn--completed .screen-list-label {
+  opacity: 0.6;
 }
 
 .screen-panel {
@@ -108,7 +87,7 @@
   display: flex;
   align-items: center;
   gap: 0.9rem;
-  padding: 0.8rem 1.1rem;
+  padding: 0.55rem 1.1rem;
   border-bottom: 1px solid var(--glass-border);
 }
 
@@ -130,10 +109,10 @@
 }
 
 .screen-frame-media {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 6;
   display: flex;
   align-items: flex-end;
-  padding: 1.3rem;
+  padding: 1.1rem;
   position: relative;
   background:
     radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.06), transparent 55%),

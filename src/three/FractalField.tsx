@@ -25,8 +25,7 @@ export default function FractalField() {
   const orbit = useRef<Float32Array>(new Float32Array(COUNT * 4));
 
   const { geometry, home } = useMemo(() => {
-    const xOffset = viewport.width * 0.14;
-    const homeArr = generateFractalPoints(COUNT, viewport.width, viewport.height, xOffset);
+    const homeArr = generateFractalPoints(COUNT, viewport.width, viewport.height);
     const positions = homeArr.slice();
     const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
@@ -52,8 +51,7 @@ export default function FractalField() {
       mounted.current = true;
       return;
     }
-    const xOffset = viewport.width * 0.14;
-    const newHome = generateFractalPoints(COUNT, viewport.width, viewport.height, xOffset);
+    const newHome = generateFractalPoints(COUNT, viewport.width, viewport.height);
     home.current = newHome;
     const posAttr = geometry.attributes.position as THREE.BufferAttribute;
     (posAttr.array as Float32Array).set(newHome);

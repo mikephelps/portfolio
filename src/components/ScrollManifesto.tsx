@@ -11,7 +11,13 @@ const BEATS = [
 ];
 
 const CLOSING_PARAGRAPH =
-  "These aren't just words — they're how I work. When the brief runs out, I keep going. When the tools don't exist yet, I build them. That's the throughline from every brand I've launched to every system I've shipped, and it's why I lean into AI as a craft partner, not a shortcut.";
+  "This is how I work. I keep going. When the tools don't exist yet, I work to build them. That's the throughline from every brand I've launched to every system I've shipped, and it's why I lean into using AI as a craft partner, not a shortcut.";
+
+const EMPHASIS_WORDS = new Set(["really", "resilient", "resourceful", "dream", "find", "unlock"]);
+
+function stripPunctuation(word: string) {
+  return word.toLowerCase().replace(/[^a-z]/g, "");
+}
 
 // 6 headline beats + 1 segment for the closing paragraph reveal.
 const SEGMENT_COUNT = BEATS.length + 1;
@@ -113,11 +119,11 @@ export default function ScrollManifesto() {
       if (paragraph) {
         if (segmentIndex < BEATS.length) {
           paragraph.style.opacity = "0";
-          paragraph.style.transform = "translateY(1.1em)";
+          paragraph.style.transform = "translate(-50%, 0.9em)";
         } else {
           const p = Math.min(1, localT / 0.6);
           paragraph.style.opacity = String(p);
-          paragraph.style.transform = `translateY(${1.1 * (1 - p)}em)`;
+          paragraph.style.transform = `translate(-50%, ${0.9 * (1 - p)}em)`;
         }
       }
     };
@@ -145,7 +151,10 @@ export default function ScrollManifesto() {
             return (
               <span className="manifesto-beat" key={beat}>
                 {splitIntoWords(beat).map((word, wordIndex) => (
-                  <span className="manifesto-word" key={wordIndex}>
+                  <span
+                    className={`manifesto-word ${EMPHASIS_WORDS.has(stripPunctuation(word)) ? "manifesto-word--accent" : ""}`}
+                    key={wordIndex}
+                  >
                     {word.split("").map((char, charIndex) => {
                       const letterIndex = letterCounter++;
                       return (
@@ -165,10 +174,11 @@ export default function ScrollManifesto() {
               </span>
             );
           })}
+
+          <p ref={paragraphRef} className="manifesto-paragraph">
+            {CLOSING_PARAGRAPH}
+          </p>
         </div>
-        <p ref={paragraphRef} className="manifesto-paragraph">
-          {CLOSING_PARAGRAPH}
-        </p>
       </div>
 
       <span className="visually-hidden">

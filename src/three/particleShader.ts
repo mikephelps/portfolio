@@ -21,9 +21,11 @@ void main() {
   vec2 coord = gl_PointCoord - vec2(0.5);
   float dist = length(coord);
   if (dist > 0.5) discard;
-  float core = smoothstep(0.5, 0.0, dist);
-  float alpha = pow(core, 0.6);
+  // A tight edge falloff instead of a wide gaussian glow — reads as a
+  // crisp dot rather than a soft, hazy blob.
+  float edge = smoothstep(0.5, 0.34, dist);
+  float alpha = pow(edge, 1.5);
   vec3 color = mix(uColor, uColorHot, clamp(vEnergy * 1.4, 0.0, 1.0));
-  gl_FragColor = vec4(color, alpha * (0.85 + vEnergy * 0.5));
+  gl_FragColor = vec4(color, alpha * (0.9 + vEnergy * 0.5));
 }
 `;

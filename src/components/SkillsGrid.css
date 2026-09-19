@@ -1,0 +1,59 @@
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-tile {
+  perspective: 1000px;
+}
+
+/* The rotating half of the tile. Front sits in normal flow and sets the
+   box's size (so each tile shrink-wraps its own label); back is absolutely
+   positioned to exactly match that same box. Hinged at the bottom edge so
+   the flip reads as tipping up and back, not spinning like a door. */
+.skill-tile-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
+  transition: transform 0.6s var(--ease-premium);
+  border-radius: 9px;
+}
+
+.skill-tile:hover .skill-tile-card,
+.skill-tile:focus-within .skill-tile-card {
+  transform: rotateX(-180deg);
+}
+
+.skill-tile-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.7rem 1.1rem;
+  border-radius: inherit;
+  font-size: 0.85rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.skill-tile-face--front {
+  background: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ink-dim);
+  transition: border-color var(--dur-fast) var(--ease-premium);
+}
+
+.skill-tile:hover .skill-tile-face--front {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.skill-tile-face--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateX(180deg);
+  transform-origin: center bottom;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}

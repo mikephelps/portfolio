@@ -18,6 +18,12 @@ export default function FractalField() {
   const pointerActive = useRef(false);
   const mounted = useRef(false);
 
+  // Per-particle drift parameters: [radiusX, radiusY, speed, phase]. Each
+  // particle continuously orbits a small ellipse around its "home" spot
+  // instead of sitting still there, so the whole field stays in gentle,
+  // never-repeating-looking motion even with no pointer interaction.
+  const orbit = useRef<Float32Array>(new Float32Array(COUNT * 4));
+
   const { geometry, home } = useMemo(() => {
     const xOffset = viewport.width * 0.14;
     const homeArr = generateFractalPoints(COUNT, viewport.width, viewport.height, xOffset);
@@ -25,6 +31,11 @@ export default function FractalField() {
     const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
       sizes[i] = 3.2 + Math.random() * 4.2;
+      const oi = i * 4;
+      orbit.current[oi] = 6 + Math.random() * 22;
+      orbit.current[oi + 1] = 6 + Math.random() * 22;
+      orbit.current[oi + 2] = 0.12 + Math.random() * 0.3;
+      orbit.current[oi + 3] = Math.random() * Math.PI * 2;
     }
 
     const geo = new THREE.BufferGeometry();
@@ -68,13 +79,15 @@ export default function FractalField() {
     };
   }, [viewport.width, viewport.height]);
 
-  useFrame(() => {
+  useFrame((state) => {
     const posAttr = geometry.attributes.position as THREE.BufferAttribute;
     const energyAttr = geometry.attributes.aEnergy as THREE.BufferAttribute;
     const pos = posAttr.array as Float32Array;
     const vel = velocity.current;
     const hm = home.current;
     const en = energy.current;
+    const ob = orbit.current;
+    const t = state.clock.elapsedTime;
 
     const repelRadius = Math.min(viewport.width, viewport.height) * 0.16;
     const repelStrength = 2.6;
@@ -86,6 +99,7 @@ export default function FractalField() {
 
     for (let i = 0; i < COUNT; i++) {
       const idx = i * 3;
+      const oi = i * 4;
       const px = pos[idx];
       const py = pos[idx + 1];
       const pz = pos[idx + 2];
@@ -104,8 +118,15 @@ export default function FractalField() {
         vy += dym * force;
       }
 
-      vx += (hm[idx] - px) * spring;
-      vy += (hm[idx + 1] - py) * spring;
+      // Orbit target: each particle's spring pulls toward a point drifting
+      // in a small ellipse around its home position, so the field keeps
+      // flowing on its own instead of settling into a static formation.
+      const phase = t * ob[oi + 2] + ob[oi + 3];
+      const targetX = hm[idx] + Math.cos(phase) * ob[oi];
+      const targetY = hm[idx + 1] + Math.sin(phase * 1.3) * ob[oi + 1];
+
+      vx += (targetX - px) * spring;
+      vy += (targetY - py) * spring;
       vz += (hm[idx + 2] - pz) * spring;
 
       vx *= damping;
@@ -127,7 +148,10 @@ export default function FractalField() {
       const dispY = ny - hm[idx + 1];
       const dispZ = nz - hm[idx + 2];
       const disp = Math.sqrt(dispX * dispX + dispY * dispY + dispZ * dispZ);
-      const target = Math.min(disp / 90, 1);
+      // Divisor raised so the ambient orbit drift only tints particles
+      // faintly — the brighter "hot" glow still reads as a response to the
+      // pointer's repel force specifically, not as constant background noise.
+      const target = Math.min(disp / 160, 1);
       en[i] += (target - en[i]) * 0.12;
     }
 
@@ -136,7 +160,7 @@ export default function FractalField() {
     energyAttr.needsUpdate = true;
 
     if (pointsRef.current) {
-      pointsRef.current.rotation.z += 0.00025;
+      pointsRef.current.rotation.z += 0.00055;
     }
   });
 

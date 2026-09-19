@@ -13,11 +13,11 @@
   --accent-glow: rgba(90, 44, 218, 0.4);
   --on-accent: #f5f2ff;
 
-  /* glass — genuinely dark, fairly opaque frosted surfaces. Blur alone
-     against a mostly-black page reads as nothing; the darkness is what
-     sells "surface", the blur just softens whatever moves behind it. */
-  --glass-bg: rgba(14, 12, 20, 0.55);
-  --glass-bg-strong: rgba(14, 12, 20, 0.78);
+  /* glass — dark, mid-opacity frosted surfaces. Too opaque and the blur
+     behind them never reads at all; this keeps enough see-through for the
+     backdrop-filter blur to actually be visible while staying legible. */
+  --glass-bg: rgba(14, 12, 20, 0.4);
+  --glass-bg-strong: rgba(14, 12, 20, 0.58);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.35);
   --glass-shadow: rgba(0, 0, 0, 0.55);

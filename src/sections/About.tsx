@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import Logo from "../components/Logo";
-import { skillGroups } from "../data/skills";
+import SkillsGrid from "../components/SkillsGrid";
 import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./About.css";
 
@@ -64,24 +64,9 @@ export default function About() {
         </div>
       </div>
 
-      <motion.div
-        className="about-skills"
-        initial="hidden"
-        whileInView="show"
-        viewport={fadeUpViewport}
-        variants={rowStagger}
-      >
-        {skillGroups.map((group) => (
-          <motion.div className="about-skill-group glass" key={group.label} variants={fadeUpItem}>
-            <span className="about-skill-group-label">{group.label}</span>
-            <ul className="about-skill-list">
-              {group.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className="about-skills">
+        <SkillsGrid />
+      </div>
     </section>
   );
 }

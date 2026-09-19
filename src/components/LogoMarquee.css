@@ -59,7 +59,10 @@
   width: auto;
   margin: 0 clamp(1.6rem, 4vw, 3.4rem);
   opacity: 0.55;
-  filter: grayscale(100%);
+  /* Logos ship with their own dark fill color baked into the SVG — this
+     forces every one of them to a flat white silhouette regardless of
+     source color, so the mixed brand colors don't clash with the dark bg. */
+  filter: brightness(0) invert(1);
   transition: opacity var(--dur-fast) var(--ease-premium);
 }
 

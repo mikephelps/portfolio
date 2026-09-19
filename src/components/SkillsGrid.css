@@ -58,3 +58,11 @@
   font-weight: 600;
   letter-spacing: 0.01em;
 }
+
+/* One-time intro reveal (see SkillsGrid.tsx) — durations here must match
+   REVEAL_FADE_MS / REVEAL_FLIP_MS in the component. */
+.skill-tile-card--reveal {
+  transition:
+    opacity 0.35s ease,
+    transform 0.5s var(--ease-premium);
+}

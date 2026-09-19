@@ -15,7 +15,14 @@ export default function ScreenFrameMedia({ screen }: ScreenFrameMediaProps) {
     return <span className="screen-frame-caption">{screen.label}</span>;
   }
 
-  const style = { objectFit: media.fit ?? "cover", objectPosition: media.position ?? "center" } as const;
+  // Images render at their natural size by default (see .screen-frame-asset)
+  // — nothing is ever cropped. fit/position are only meaningful as an
+  // override for the rare oversized asset that hits the pinned-viewport
+  // safety cap; leave them unset and the CSS default (contain/center) applies.
+  const style = {
+    ...(media.fit && { objectFit: media.fit }),
+    ...(media.position && { objectPosition: media.position }),
+  };
 
   if (media.type === "video") {
     return (

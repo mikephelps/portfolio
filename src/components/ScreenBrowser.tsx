@@ -102,7 +102,7 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
             <div className="screen-frame-media">
               <ScreenFrameMedia screen={active} />
               {active.description && (
-                <div className="screen-context-panel glass glass-strong">
+                <div className="screen-context-panel">
                   <p className="screen-context-text">{active.description}</p>
                 </div>
               )}

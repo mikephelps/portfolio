@@ -34,9 +34,11 @@
   color: var(--ink-faint);
 }
 
-/* Generous, legible image height — the old tabbed layout's images got
-   squeezed short to fit everything above the fold while pinned; nothing
-   pins on mobile anymore, so there's no reason not to give each one room. */
-.screen-stack-item .screen-frame-media {
-  aspect-ratio: 4 / 3;
+/* No pin/viewport constraint here at all, so each image just renders at
+   its own natural size (see .screen-frame-asset) — full width, no crop,
+   no letterbox, height following whatever the source asset actually is.
+   The desktop pinned-viewport max-height cap doesn't apply here — normal
+   scrolling has no ceiling to protect. */
+.screen-stack-item .screen-frame-asset {
+  max-height: none;
 }

@@ -19,15 +19,13 @@ export type ScreenMedia = {
   // Put files in src/assets/screens/ and import them (not a public/ path
   // string) so Vite fingerprints and bundles them correctly.
   src: string;
-  // "cover" (default) fills the frame and crops any excess; "contain"
-  // shows the whole asset letterboxed instead. Use "contain" for anything
-  // that isn't roughly the frame's own aspect ratio (a tall mobile-app
-  // screenshot, for instance) so nothing gets cropped away.
+  // Every image/video renders at its own natural aspect ratio, full width
+  // — nothing is ever cropped or letterboxed. On desktop only, an
+  // unusually tall asset is capped by a max-height safety net (so it can
+  // never blow out the pinned viewport) and shrinks proportionally rather
+  // than cropping; fit/position only matter for THAT edge case, to control
+  // how it shrinks. Leave both unset for the normal case.
   fit?: "cover" | "contain";
-  // CSS object-position. Defaults to "center" — for a full web page
-  // screenshot taller than the frame, "top" keeps the header/hero (the
-  // part that actually identifies the page) in frame instead of whatever
-  // happened to land in the vertical middle.
   position?: string;
 };
 
@@ -84,14 +82,14 @@ export const clientProjects: ClientProject[] = [
         id: "color-tokens",
         label: "Design System: Color Tokens",
         Icon: IconSliders,
-        media: { type: "image", src: linkedinColorTokensImg, fit: "contain" },
+        media: { type: "image", src: linkedinColorTokensImg },
         description: "Created the design system foundations including full color token architecture.",
       },
       {
         id: "components",
         label: "Design System: Components",
         Icon: IconLayout,
-        media: { type: "image", src: linkedinComponentsImg, fit: "contain" },
+        media: { type: "image", src: linkedinComponentsImg },
         description:
           "Built all new, custom components in Figma including: heroes, cards, features, banners, etc.",
       },

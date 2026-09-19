@@ -121,16 +121,30 @@
    ever cropped or letterboxed — see .screen-frame-asset. min-height only
    keeps the placeholder "TBD" caption looking like a proper browser
    window before real media exists; it has no effect once a real asset
-   (any height) is in flow. */
+   (any height) is in flow. Flat, neutral fallback background only — a
+   decorative gradient/glow here used to sit on top of a real screenshot's
+   own exact colors (see .screen-frame-empty below for where that
+   flourish actually belongs: the placeholder state only). */
 .screen-frame-media {
   min-height: clamp(220px, 26vw, 360px);
   position: relative;
+  background: #0a0a0c;
+}
+
+/* The decorative gradient + glow live here now, scoped to the "no real
+   media yet" placeholder state only — they were previously on
+   .screen-frame-media itself, which meant they painted on TOP of every
+   real screenshot too, tinting the client's own exact colors with our
+   site's purple accent glow. */
+.screen-frame-empty {
+  position: absolute;
+  inset: 0;
   background:
     radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.06), transparent 55%),
     linear-gradient(160deg, #17131f 0%, #0c0a12 60%, #0a0a0c 100%);
 }
 
-.screen-frame-media::after {
+.screen-frame-empty::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -169,44 +183,50 @@
 /* Per-image context, revealed on hover. A shared translucent .glass
    surface is NOT legible here — those tokens (58% opacity, 22px blur) are
    tuned for sitting over the dim particle background, not a bright/busy
-   screenshot. My first attempt at a fix overcorrected the other way: a
+   screenshot. An earlier attempt at a fix overcorrected the other way: a
    near-opaque gradient (94-97%) that was legible but genuinely opaque —
    not translucent, not actually blurring anything, just hiding it. Proven
    (via a real busy/high-contrast test image, cropped and inspected pixel
    by pixel) that blur(40px) + a MODERATE ~55% tint is enough to fully
    obscure fine detail and text while still visibly showing blurred color
-   through the panel — genuine frosted glass, not a flat scrim. Anchored
-   to the bottom of the media box and capped with its own max-height +
-   scroll rather than growing the frame. */
+   through the panel — genuine frosted glass, not a flat scrim.
+
+   Covers the full image now (not just a bottom sliver) so it reads as a
+   deliberate reveal rather than something easy to miss — the text block
+   itself stays a centered, comfortably-measured column so a short
+   description doesn't sprawl edge to edge, but its type is left-aligned
+   (paragraphs read better ragged-left than centered). */
 .screen-context-panel {
   position: absolute;
-  inset: auto 0 0 0;
+  inset: 0;
   z-index: 2;
-  max-height: 62%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow-y: auto;
-  padding: 1rem 1.1rem 0.9rem;
-  background: linear-gradient(to top, rgba(10, 9, 14, 0.62) 0%, rgba(10, 9, 14, 0.56) 55%, rgba(10, 9, 14, 0.32) 100%);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: rgba(10, 9, 14, 0.6);
   backdrop-filter: blur(40px) saturate(160%);
   -webkit-backdrop-filter: blur(40px) saturate(160%);
   opacity: 0;
-  transform: translateY(6px);
   pointer-events: none;
-  transition:
-    opacity var(--dur-fast) var(--ease-premium),
-    transform var(--dur-fast) var(--ease-premium);
+  transition: opacity var(--dur-med) var(--ease-premium);
 }
 
 .screen-frame-media:hover .screen-context-panel {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 
 .screen-context-text {
   position: relative;
   z-index: 1;
-  font-size: 0.85rem;
-  line-height: 1.55;
+  max-width: 34rem;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--ink);
 }
 

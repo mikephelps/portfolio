@@ -93,6 +93,24 @@ export const clientProjects: ClientProject[] = [
         description:
           "Built all new, custom components in Figma including: heroes, cards, features, banners, etc.",
       },
+      {
+        id: "ai-workflow",
+        label: "AI Workflow & Design System",
+        Icon: IconBolt,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
+      {
+        id: "aem-tokens-components",
+        label: "AEM: Custom Tokens & Components",
+        Icon: IconLayers,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
+      {
+        id: "aem-code-seo",
+        label: "AEM: Custom Code & SEO",
+        Icon: IconWindow,
+        description: "Description TBD — a short paragraph of context for this image will go here.",
+      },
     ],
   },
   {

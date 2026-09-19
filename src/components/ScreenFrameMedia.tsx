@@ -12,7 +12,11 @@ type ScreenFrameMediaProps = {
 export default function ScreenFrameMedia({ screen }: ScreenFrameMediaProps) {
   const media = screen.media;
   if (!media) {
-    return <span className="screen-frame-caption">{screen.label}</span>;
+    return (
+      <span className="screen-frame-empty">
+        <span className="screen-frame-caption">{screen.label}</span>
+      </span>
+    );
   }
 
   // Images render at their natural size by default (see .screen-frame-asset)

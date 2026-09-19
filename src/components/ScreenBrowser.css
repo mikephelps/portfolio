@@ -21,14 +21,13 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  border-radius: 6px;
   text-align: left;
   background: none;
   border: none;
   color: var(--ink-faint);
   font-size: 0.92rem;
-  transition: color var(--dur-fast) var(--ease-premium);
   overflow: hidden;
 }
 
@@ -36,49 +35,63 @@
   color: var(--ink-dim);
 }
 
-.screen-list-btn--active,
-.screen-list-btn--active:hover {
-  color: var(--ink);
-}
-
-/* Scroll-linked reading progress: fills left-to-right as the item passes
-   the trigger line, independent of which item is the "active" one. */
-.screen-list-fill {
+/* The highlighter sweep: a solid marker-style bar that grows behind the
+   text as you scroll past it, like literally highlighting the line. It
+   snaps to a full sweep the moment this item becomes "active" (by scroll
+   or by a click jump), then settles to a muted gray once you've moved on
+   — that gray + dimmed text together read as "completed". */
+.screen-list-highlight {
   position: absolute;
   inset: 0;
   right: auto;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--accent);
   border-radius: inherit;
-  z-index: -2;
-}
-
-.screen-list-pill {
-  position: absolute;
-  inset: 0;
-  background: var(--glass-bg-strong);
-  border: 1px solid var(--glass-border);
-  border-radius: inherit;
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
   z-index: -1;
 }
 
+.screen-list-highlight--completed {
+  background: rgba(255, 255, 255, 0.14);
+}
+
 .screen-list-icon {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  color: var(--ink-faint);
   flex-shrink: 0;
-  transition:
-    color var(--dur-fast) var(--ease-premium),
-    background var(--dur-fast) var(--ease-premium);
+  color: inherit;
+  transition: color var(--dur-fast) var(--ease-premium);
 }
 
 .screen-list-btn--active .screen-list-icon {
-  color: var(--accent);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}
+
+/* Two copies of the label stacked exactly on top of each other: a muted
+   base, and a bright copy clipped to the swept width so the text itself
+   lights up left-to-right in sync with the highlighter bar, rather than
+   snapping bright all at once. */
+.screen-list-label-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.screen-list-label {
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.screen-list-label--lit {
+  position: absolute;
+  inset: 0;
+  color: var(--ink);
+}
+
+.screen-list-btn--completed .screen-list-icon {
+  color: var(--ink-dim);
+}
+
+.screen-list-btn--completed .screen-list-label-wrap {
+  opacity: 0.68;
 }
 
 .screen-panel {

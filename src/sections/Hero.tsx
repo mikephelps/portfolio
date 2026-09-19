@@ -63,11 +63,14 @@ export default function Hero() {
         transition={{ duration: 1, delay: 0.5, ease: easePremium }}
       >
         <div className="hero-portrait-glow" aria-hidden="true" />
-        <img
-          src={portraitImg}
-          alt="Portrait of Mike Phelps"
-          className="hero-portrait-img"
-        />
+        <div className="hero-portrait-frame">
+          <img
+            src={portraitImg}
+            alt="Portrait of Mike Phelps"
+            className="hero-portrait-img"
+          />
+          <div className="hero-portrait-overlay" aria-hidden="true" />
+        </div>
       </motion.div>
 
       <motion.a

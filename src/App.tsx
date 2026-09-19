@@ -2,6 +2,7 @@ import Background from "./three/Background";
 import Nav from "./components/Nav";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
+import ScrollManifesto from "./components/ScrollManifesto";
 import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
@@ -14,6 +15,7 @@ function App() {
       <main className="app-content">
         <Hero />
         <About />
+        <ScrollManifesto />
         <Projects />
         <Contact />
         <Footer />

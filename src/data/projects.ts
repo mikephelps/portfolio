@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { IconBolt, IconCompass, IconLayout, IconLinkedin } from "../components/Icons";
+import { IconBolt, IconCompass, IconImage, IconLayers, IconLayout, IconLinkedin, IconWindow } from "../components/Icons";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -30,8 +30,25 @@ const tbdScreens: Screen[] = [{ id: "tbd", label: "Tab sections TBD", Icon: Icon
 
 export const clientProjects: ClientProject[] = [
   {
-    id: "linkedin",
+    id: "atlantic-shared-beginnings",
     index: "01",
+    year: "2025",
+    title: "Atlantic Fertility & Shared Beginnings",
+    role: "Lead Designer & Developer",
+    description:
+      "From the ground up. Two sister businesses in the fertility space. Both needed full new brands and websites that I designed and developed.",
+    tech: ["Illustrator", "Figma", "Framer", "HTML", "CSS"],
+    Icon: IconLayers,
+    screens: [
+      { id: "atlantic-brand", label: "Atlantic's Brand", Icon: IconImage },
+      { id: "atlantic-web", label: "Atlantic's Web", Icon: IconWindow },
+      { id: "shared-beginnings-brand", label: "Shared Beginnings' Brand", Icon: IconImage },
+      { id: "shared-beginnings-web", label: "Shared Beginnings' Web", Icon: IconWindow },
+    ],
+  },
+  {
+    id: "linkedin",
+    index: "02",
     year: "2025-Current",
     title: "LinkedIn",
     role: "Senior UX Designer",
@@ -43,7 +60,7 @@ export const clientProjects: ClientProject[] = [
   },
   {
     id: "roboro",
-    index: "02",
+    index: "03",
     year: "2025",
     title: "Roboro",
     role: "Web/Product Designer",
@@ -55,7 +72,7 @@ export const clientProjects: ClientProject[] = [
   },
   {
     id: "visier",
-    index: "03",
+    index: "04",
     year: "2021-2025",
     title: "Visier",
     role: "Lead UI/UX Designer",

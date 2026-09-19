@@ -5,7 +5,7 @@ import { IconArrowUpRight, IconGithub, IconLinkedin } from "../components/Icons"
 import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./Contact.css";
 
-const EMAIL = "hello@example.com";
+const EMAIL = "mikeephelps@gmail.com";
 const cardStagger = staggerContainer(0.1);
 
 export default function Contact() {

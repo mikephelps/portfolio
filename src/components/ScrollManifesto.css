@@ -1,0 +1,72 @@
+/* A 700vh scroll-driven reveal: the sticky panel below is the entire "lock"
+   mechanism (plain CSS position:sticky, no wheel-hijacking) — this wrapper
+   just gives it enough scroll distance to hold across 7 beats before
+   naturally releasing back into normal document flow. */
+.manifesto-wrapper {
+  position: relative;
+  height: 700vh;
+}
+
+.manifesto-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 var(--edge);
+}
+
+.manifesto-headline {
+  position: relative;
+  width: 100%;
+  max-width: 62rem;
+  min-height: clamp(3.6rem, 9vw, 6.5rem);
+}
+
+.manifesto-beat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 0.32em;
+  row-gap: 0.1em;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6.5vw, 4.6rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.manifesto-word {
+  display: inline-flex;
+}
+
+.manifesto-letter {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+.manifesto-paragraph {
+  position: relative;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  max-width: 38rem;
+  text-align: center;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  line-height: 1.65;
+  color: var(--ink-dim);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+@media (max-width: 640px) {
+  .manifesto-headline {
+    min-height: clamp(5.4rem, 24vw, 8rem);
+  }
+}

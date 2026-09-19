@@ -90,7 +90,12 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
                 <span />
               </span>
               <span className="screen-frame-label">
-                {title.toLowerCase().replace(/\s+/g, "-")}/{active.id}
+                {title
+                  .toLowerCase()
+                  .replace(/[^a-z0-9\s-]/g, "")
+                  .trim()
+                  .replace(/\s+/g, "-")}
+                /{active.id}
               </span>
             </div>
             <div className="screen-frame-media">

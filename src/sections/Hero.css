@@ -125,6 +125,12 @@
     align-self: flex-start;
     margin-bottom: 1.8rem;
   }
+
+  /* Smaller on mobile, so the base 60% desktop opacity reads too dim —
+     bump the default (not the hover state) up for legibility. */
+  .hero-portrait-img {
+    opacity: 0.75;
+  }
 }
 
 .hero-eyebrow {

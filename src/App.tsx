@@ -1,6 +1,7 @@
 import Background from "./three/Background";
 import Nav from "./components/Nav";
 import Hero from "./sections/Hero";
+import LogoMarquee from "./components/LogoMarquee";
 import About from "./sections/About";
 import ScrollManifesto from "./components/ScrollManifesto";
 import Projects from "./sections/Projects";
@@ -14,6 +15,7 @@ function App() {
       <Nav />
       <main className="app-content">
         <Hero />
+        <LogoMarquee />
         <About />
         <ScrollManifesto />
         <Projects />

@@ -145,6 +145,15 @@ export function IconLayout({ size = 18, strokeWidth = 1.6 }: IconProps) {
   );
 }
 
+export function IconSearch({ size = 18, strokeWidth = 1.8 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={strokeWidth}>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m20 20-4.3-4.3" />
+    </svg>
+  );
+}
+
 export function IconMenu({ size = 20 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...base} strokeWidth={1.7}>

@@ -1,0 +1,56 @@
+/* A solid (not translucent/blurred) scrim on purpose — this is a dimmer
+   behind an enlarged image, not a text-legibility surface, so there's no
+   reason to lean on backdrop-filter here at all. */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background: rgba(4, 3, 6, 0.92);
+  cursor: zoom-out;
+}
+
+.image-lightbox-frame {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: default;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.7);
+}
+
+.image-lightbox-media {
+  display: block;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.image-lightbox-close {
+  position: fixed;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-premium),
+    transform var(--dur-fast) var(--ease-snap);
+}
+
+.image-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.06);
+}

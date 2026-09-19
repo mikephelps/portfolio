@@ -42,3 +42,11 @@
 .screen-stack-item .screen-frame-asset {
   max-height: none;
 }
+
+/* No hover on touch, so the zoom affordance has to just be visible
+   always rather than reveal on hover like the desktop version does. */
+.screen-stack-item .screen-zoom-button {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}

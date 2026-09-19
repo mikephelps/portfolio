@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { AnimatePresence, motion, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 import type { Screen } from "../data/projects";
 import ScreenFrameMedia from "./ScreenFrameMedia";
+import ImageLightbox from "./ImageLightbox";
+import { IconSearch } from "./Icons";
 import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
 
@@ -51,6 +54,7 @@ function ScreenListItem({ screen, itemId, index, rawIndex, isCompleted, onSelect
 
 export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, activeIndex, onSelect }: ScreenBrowserProps) {
   const active = screens[activeIndex] ?? screens[0];
+  const [isZoomed, setIsZoomed] = useState(false);
 
   return (
     <div className="screen-browser">
@@ -99,8 +103,24 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
                 /{active.id}
               </span>
             </div>
-            <div className="screen-frame-media">
+            <div
+              className={`screen-frame-media ${active.media ? "screen-frame-media--zoomable" : ""}`}
+              onClick={() => active.media && setIsZoomed(true)}
+            >
               <ScreenFrameMedia screen={active} />
+              {active.media && (
+                <button
+                  type="button"
+                  className="screen-zoom-button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setIsZoomed(true);
+                  }}
+                  aria-label={`Enlarge ${active.label}`}
+                >
+                  <IconSearch size={17} />
+                </button>
+              )}
               {active.description && (
                 <div className="screen-context-panel">
                   <div className="screen-context-inner">
@@ -113,6 +133,12 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <ImageLightbox
+        media={isZoomed ? (active.media ?? null) : null}
+        alt={active.label}
+        onClose={() => setIsZoomed(false)}
+      />
     </div>
   );
 }

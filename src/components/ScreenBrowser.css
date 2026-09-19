@@ -237,6 +237,49 @@
   color: var(--ink);
 }
 
+.screen-frame-media--zoomable {
+  cursor: zoom-in;
+}
+
+/* Click-to-enlarge affordance. Sits above the description panel
+   (z-index 2) so it stays visible and clickable even while that panel
+   is showing on hover — desktop only shows it on hover (matching the
+   description panel's own reveal), since mobile has no hover concept
+   and shows it always (see ScreenStack.css). */
+.screen-zoom-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  box-shadow: 0 8px 20px -6px var(--accent-glow);
+  transition:
+    opacity var(--dur-fast) var(--ease-premium),
+    transform var(--dur-fast) var(--ease-snap),
+    background var(--dur-fast) var(--ease-premium);
+}
+
+.screen-frame-media:hover .screen-zoom-button {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.screen-zoom-button:hover {
+  background: var(--accent-bright);
+}
+
 /* ScreenBrowser (the tabbed, scroll-pinned scrub UI) only ever renders on
    desktop now — mobile uses ScreenStack, a plain scrolling list — so no
    narrow-viewport override is needed here.

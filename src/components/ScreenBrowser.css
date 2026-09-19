@@ -116,29 +116,32 @@
   color: var(--ink-faint);
 }
 
-/* No fixed aspect-ratio: a real image/video renders at its own natural
-   size (full width, height following its intrinsic ratio) so nothing is
-   ever cropped or letterboxed — see .screen-frame-asset. min-height only
-   keeps the placeholder "TBD" caption looking like a proper browser
-   window before real media exists; it has no effect once a real asset
-   (any height) is in flow. Flat, neutral fallback background only — a
-   decorative gradient/glow here used to sit on top of a real screenshot's
-   own exact colors (see .screen-frame-empty below for where that
-   flourish actually belongs: the placeholder state only). */
+/* No fixed aspect-ratio and no min-height here: the container hugs
+   whichever child actually renders — a real image/video at its own
+   natural size (full width, height following its intrinsic ratio, never
+   cropped or letterboxed — see .screen-frame-asset), or .screen-frame-empty
+   below when there's no media yet. min-height used to live here, which
+   meant it acted as a floor UNDER a real image too whenever the image's
+   own natural height (driven by column width) dipped below that
+   viewport-width-driven clamp() — exactly the "gap below the image at
+   some sizes" bug. The empty state now carries its own min-height as a
+   normal-flow block instead, so it never leans on the parent. */
 .screen-frame-media {
-  min-height: clamp(220px, 26vw, 360px);
   position: relative;
   background: #0a0a0c;
 }
 
 /* The decorative gradient + glow live here now, scoped to the "no real
-   media yet" placeholder state only — they were previously on
+   media yet" placeholder state only — they used to live on
    .screen-frame-media itself, which meant they painted on TOP of every
    real screenshot too, tinting the client's own exact colors with our
-   site's purple accent glow. */
+   site's purple accent glow. Normal-flow block (not absolutely
+   positioned) so its own min-height actually gives it height — it's
+   never a sibling of a real image, so this can't reintroduce the gap. */
 .screen-frame-empty {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  min-height: clamp(220px, 26vw, 360px);
+  display: block;
   background:
     radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.06), transparent 55%),
     linear-gradient(160deg, #17131f 0%, #0c0a12 60%, #0a0a0c 100%);

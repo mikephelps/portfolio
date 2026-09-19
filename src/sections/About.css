@@ -78,6 +78,11 @@
   margin-top: clamp(3rem, 6vw, 5rem);
 }
 
+.about-skills-eyebrow {
+  display: block;
+  margin-bottom: 1.1rem;
+}
+
 @media (max-width: 860px) {
   .about-grid {
     grid-template-columns: 1fr;

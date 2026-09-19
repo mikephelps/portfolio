@@ -65,6 +65,9 @@ export default function About() {
       </div>
 
       <div className="about-skills">
+        <Reveal>
+          <span className="eyebrow about-skills-eyebrow">Skills &amp; tools</span>
+        </Reveal>
         <SkillsGrid />
       </div>
     </section>

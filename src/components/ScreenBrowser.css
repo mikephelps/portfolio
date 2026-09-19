@@ -1,3 +1,16 @@
+/* The frame is a tall spacer (its height is set inline, proportional to
+   screen count); .screen-browser-sticky pins the actual widget in place —
+   via plain CSS position:sticky, so the pin/release timing is free and
+   exact — while the user scrolls through that extra height. */
+.screen-browser-frame {
+  position: relative;
+}
+
+.screen-browser-sticky {
+  position: sticky;
+  top: 120px;
+}
+
 .screen-browser {
   display: grid;
   grid-template-columns: minmax(220px, 300px) 1fr;
@@ -86,11 +99,6 @@
   opacity: 0.6;
 }
 
-.screen-panel {
-  position: sticky;
-  top: calc(clamp(0.9rem, 2.5vw, 1.75rem) + 96px);
-}
-
 .screen-frame {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -156,7 +164,7 @@
     height: 52px;
   }
 
-  .screen-panel {
-    position: static;
+  .screen-browser-sticky {
+    top: 90px;
   }
 }

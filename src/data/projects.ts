@@ -1,5 +1,16 @@
 import type { ComponentType } from "react";
-import { IconBolt, IconCompass, IconImage, IconLayers, IconLayout, IconLinkedin, IconWindow } from "../components/Icons";
+import {
+  IconBolt,
+  IconCompass,
+  IconImage,
+  IconLayers,
+  IconLayout,
+  IconLinkedin,
+  IconSliders,
+  IconWindow,
+} from "../components/Icons";
+import linkedinColorTokensImg from "../assets/screens/linkedin-color-tokens.png";
+import linkedinComponentsImg from "../assets/screens/linkedin-components.png";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -68,7 +79,23 @@ export const clientProjects: ClientProject[] = [
       "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
     tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
     Icon: IconLinkedin,
-    screens: tbdScreens,
+    screens: [
+      {
+        id: "color-tokens",
+        label: "Design System: Color Tokens",
+        Icon: IconSliders,
+        media: { type: "image", src: linkedinColorTokensImg, position: "top" },
+        description: "Created the design system foundations including full color token architecture.",
+      },
+      {
+        id: "components",
+        label: "Design System: Components",
+        Icon: IconLayout,
+        media: { type: "image", src: linkedinComponentsImg, position: "top" },
+        description:
+          "Built all new, custom components in Figma including: heroes, cards, features, banners, etc.",
+      },
+    ],
   },
   {
     id: "roboro",

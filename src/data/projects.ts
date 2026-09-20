@@ -259,10 +259,12 @@ export const clientProjects: ClientProject[] = [
       "From the ground up. Two sister businesses in the fertility space. Both needed full new brands and websites that I designed and developed.",
     tech: ["Illustrator", "Figma", "Framer", "HTML", "CSS"],
     roleDetails: [
-      "Placeholder role notes for Atlantic Fertility & Shared Beginnings — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
-      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the two brands and sites took their current shape.",
-      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across brand and web.",
-      "Placeholder paragraph four: outcomes and what this work set up going forward.",
+      "Atlantic Fertility and Shared Beginnings are sister fertility businesses, and I took on their full rebrand and website redesign as side projects that grew into more than a year of work, done solo, start to finish. Both sites had the same problem: overloaded page counts, walls of dense text, and stock photography that looked a decade out of date, all wrapped around one of the most emotionally sensitive decisions a couple can make. My job was to take that experience and make it feel approachable instead of clinical, for people already carrying enough weight just getting through the door.",
+      "Atlantic's brand needed to start over completely. I built the new logo, then everything underneath it: guidelines, photography direction and selection, a full color palette with tints and shades, custom icons and illustrations, and the brand's character, personality, traits, and tone from scratch.",
+      "For the website, I worked with an agency on the architecture, and together we rebuilt the IA and rewrote every piece of web copy. I designed straight into the web build platform and CMS for this one rather than handing off static comps, building custom components, program page templates, and interactivity everywhere it earned its place.",
+      "Shared Beginnings needed the same ground-up treatment. I built its new logo, guidelines, photography direction and selection, full color palette with tints and shades, custom icons and illustrations, and its own distinct brand character, personality, traits, and tone, built separately from Atlantic's even though the two businesses are related.",
+      "The web goal here was different: bring in a human touch. The brand shows up in every corner of the experience, down to premium components that add soft brand moments to things as ordinary as pricing comparison cards. Where the old site was cluttered and confusing, the redesign simplifies those same moments without losing any of the warmth the brand was built to carry.",
+      "Both projects took over a year and I built them entirely on my own. The clients were ecstatic with the result then, and still is now.",
     ],
     Icon: IconLayers,
     screens: [
@@ -271,28 +273,32 @@ export const clientProjects: ClientProject[] = [
         label: "Atlantic's Brand",
         Icon: IconImage,
         media: { type: "image", src: atlanticBrandImg },
-        description: "Designed Atlantic Fertility's brand identity, from the logo mark through a full color palette.",
+        description:
+          "Atlantic's presence sorely needed a new brand. I put together not just a new logo but guidelines, photography direction and selection, full color palette with tints and shades, custom icons and illustrations, as well as building out the full brand character / personality / traits / tone.",
       },
       {
         id: "atlantic-web",
         label: "Atlantic's Web",
         Icon: IconWindow,
         media: { type: "video", src: atlanticWebVideo },
-        description: "Designed and built Atlantic Fertility's website, bringing the new brand to life in Framer.",
+        description:
+          "I worked with an agency to build the architecture of this newly redesigned site. We together built a new IA and full rewrite of all web copy. For this one, I designed straight into the web CMS. Custom components, program page templates, and interactivity wherever it was necessary.",
       },
       {
         id: "shared-beginnings-brand",
         label: "Shared Beginnings' Brand",
         Icon: IconImage,
         media: { type: "image", src: sharedBeginningsBrandImg },
-        description: "Designed Shared Beginnings' brand identity, from the logo mark through a full color palette.",
+        description:
+          "Shared Beginnings' also needed a new brand direction. Exactly like Atlantic, I put together a new logo, guidelines, photography direction and selection, full color palette with tints and shades, custom icons and illustrations, as well as building out the full brand character / personality / traits / tone.",
       },
       {
         id: "shared-beginnings-web",
         label: "Shared Beginnings' Web",
         Icon: IconWindow,
         media: { type: "video", src: sharedBeginningsWebVideo },
-        description: "Designed and built Shared Beginnings' website, bringing the new brand to life in Framer.",
+        description:
+          "The goal for the web was to bring in a human touch. The brand shines through in every corner of this experience. There are premium components that add soft brand moments to things like pricing comparison cards. There are many UX moments that beautifully simplify a once cluttered, confusing experience.",
       },
     ],
   },

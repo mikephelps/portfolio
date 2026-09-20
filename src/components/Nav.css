@@ -11,13 +11,15 @@
 }
 
 /* Navigation has to stay legible over literally anything scrolled behind
-   it — busy text, bright images, the particle field — so it gets its own
-   near-opaque background instead of the subtler shared --glass-bg tokens
-   (those are tuned for decorative cards, where some see-through blur is
-   the point). backdrop-filter still softens whatever sliver shows through. */
+   it — busy text, bright images, the particle field — so it gets a darker
+   background than the shared --glass-bg tokens. This used to be 0.94,
+   which is so close to opaque that the .glass class's backdrop-filter
+   blur had almost nothing left to show through — it was technically
+   applying but visually imperceptible. 0.8 keeps enough of a legibility
+   margin while actually letting the blur read. */
 .nav.glass,
 .nav-mobile.glass {
-  background: rgba(8, 7, 12, 0.94);
+  background: rgba(8, 7, 12, 0.8);
 }
 
 .nav {

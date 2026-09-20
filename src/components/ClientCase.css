@@ -56,11 +56,18 @@
 }
 
 .client-case-header {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* align-items: flex-end bottom-aligns the button with the description —
+   the last line of client-case-header-text — rather than the top of the
+   whole block, since the tech chips render as a separate full-width row
+   below this one instead of inside it. */
+.client-case-header-row {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   gap: clamp(1rem, 3vw, 2rem);
-  margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 .client-case-header-text {
@@ -90,8 +97,9 @@
 }
 
 @media (max-width: 640px) {
-  .client-case-header {
+  .client-case-header-row {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 

@@ -48,8 +48,8 @@
   --blur-chip: blur(14px) saturate(150%);
 
   /* type */
-  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Satoshi", system-ui, sans-serif;
+  --font-body: "Satoshi", system-ui, sans-serif;
 
   /* layout */
   --edge: clamp(1.5rem, 5vw, 4.5rem);

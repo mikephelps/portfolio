@@ -2,9 +2,10 @@
 @import "@fontsource/bricolage-grotesque/600.css";
 @import "@fontsource/bricolage-grotesque/700.css";
 @import "@fontsource/bricolage-grotesque/800.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
+/* Satoshi isn't distributed as an npm/self-hostable package (unlike the
+   Fontsource fonts above) — Fontshare's own CDN is the standard way to
+   load it, same as Google Fonts for anything else. */
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap");
 @import "./styles/tokens.css";
 @import "./styles/glass.css";
 

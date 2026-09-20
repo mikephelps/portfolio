@@ -88,60 +88,62 @@ export default function ClientCase({ project }: ClientCaseProps) {
             viewport={fadeUpViewport}
             variants={headerStagger}
           >
-            <div className="client-case-header-text">
-              <motion.div className="client-case-meta" variants={fadeUpItem}>
-                <span className="client-case-icon">
-                  <project.Icon size={16} />
-                </span>
-                <span className="client-case-index">{project.index}</span>
-                <span>{project.year}</span>
-              </motion.div>
-
-              <motion.h3 className="client-case-title" variants={fadeUpItem}>
-                {project.title}
-              </motion.h3>
-              <motion.span className="client-case-role" variants={fadeUpItem}>
-                {project.role}
-              </motion.span>
-
-              <motion.p className="client-case-description" variants={fadeUpItem}>
-                {project.description}
-              </motion.p>
-
-              <motion.ul className="client-case-tech" variants={chipStagger}>
-                {project.tech.map((tech) => (
-                  <motion.li key={tech} variants={fadeUpItem}>
-                    {tech}
-                  </motion.li>
-                ))}
-              </motion.ul>
-
-              {SHOW_PROJECT_LINKS && (
-                <motion.div className="client-case-links" variants={fadeUpItem}>
-                  {project.link && (
-                    <a href={project.link} className="client-case-link">
-                      <span>Live site</span>
-                      <IconArrowUpRight size={16} />
-                    </a>
-                  )}
-                  {project.repo && (
-                    <a href={project.repo} className="client-case-link">
-                      <IconGithub size={16} />
-                      <span>Source</span>
-                    </a>
-                  )}
+            <div className="client-case-header-row">
+              <div className="client-case-header-text">
+                <motion.div className="client-case-meta" variants={fadeUpItem}>
+                  <span className="client-case-icon">
+                    <project.Icon size={16} />
+                  </span>
+                  <span className="client-case-index">{project.index}</span>
+                  <span>{project.year}</span>
                 </motion.div>
-              )}
+
+                <motion.h3 className="client-case-title" variants={fadeUpItem}>
+                  {project.title}
+                </motion.h3>
+                <motion.span className="client-case-role" variants={fadeUpItem}>
+                  {project.role}
+                </motion.span>
+
+                <motion.p className="client-case-description" variants={fadeUpItem}>
+                  {project.description}
+                </motion.p>
+              </div>
+
+              <motion.button
+                type="button"
+                className="client-case-role-details-button"
+                variants={fadeUpItem}
+                onClick={() => setIsRoleDetailsOpen(true)}
+              >
+                View role details
+              </motion.button>
             </div>
 
-            <motion.button
-              type="button"
-              className="client-case-role-details-button"
-              variants={fadeUpItem}
-              onClick={() => setIsRoleDetailsOpen(true)}
-            >
-              View role details
-            </motion.button>
+            <motion.ul className="client-case-tech" variants={chipStagger}>
+              {project.tech.map((tech) => (
+                <motion.li key={tech} variants={fadeUpItem}>
+                  {tech}
+                </motion.li>
+              ))}
+            </motion.ul>
+
+            {SHOW_PROJECT_LINKS && (
+              <motion.div className="client-case-links" variants={fadeUpItem}>
+                {project.link && (
+                  <a href={project.link} className="client-case-link">
+                    <span>Live site</span>
+                    <IconArrowUpRight size={16} />
+                  </a>
+                )}
+                {project.repo && (
+                  <a href={project.repo} className="client-case-link">
+                    <IconGithub size={16} />
+                    <span>Source</span>
+                  </a>
+                )}
+              </motion.div>
+            )}
           </motion.div>
 
           <RoleDetailsDrawer

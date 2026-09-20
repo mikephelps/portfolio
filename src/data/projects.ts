@@ -145,10 +145,12 @@ export const clientProjects: ClientProject[] = [
       "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
     tech: ["Figma", "Design Systems", "Framer", "Animation"],
     roleDetails: [
-      "Placeholder role notes for Roboro — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
-      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the brand and site took their current shape.",
-      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across brand, product, and web.",
-      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+      "Roboro is an AI-based legislation tracking platform built for law and lobbying firms, and when I came on there wasn't a brand, a website, or a product design system yet. I own the design work end to end here: brand, web, and product, with nobody else to hand pieces off to. That meant every decision, from the logo to the color tokens to the calendar screen a user checks fifty times a day, ran through the same person.",
+      "I designed Roboro's brand identity from the ground up, including the logo mark and a full color token system built to hold up across marketing, web, and product from day one.",
+      "From there I designed and built the full web experience myself, starting in Figma and shipping a custom site in Framer with its own components and CMS collections to power dynamic content, so the team can update the site without touching design files.",
+      "On top of the core site, I created 15+ landing pages for lead generation and event sign-ups, each with custom UI and animation built to drive engagement, wired directly to Mailchimp so every page ties straight into the funnel.",
+      "The product side is its own build. Roboro's app helps law and lobbying firms track legislation and bills, and screens like Suggested Bills and Calendar are single pieces of a much larger product design. Calendar in particular carries a lot of dense, time-sensitive information, including custom labels that flag transcription status, so the real design problem was making complex data readable at a glance without losing any of it.",
+      "None of that had a formal design system behind it at first. I designed to consistent, system-level standards before the product had matured enough to justify building one out. Once it did, I turned that same body of Figma work into an AI-driven design markdown system, and it's grown past Bills and Calendar. That system now powers other designs and products across the org.",
     ],
     Icon: IconBolt,
     screens: [
@@ -164,28 +166,32 @@ export const clientProjects: ClientProject[] = [
         label: "Website Design & Build",
         Icon: IconLayout,
         media: { type: "image", src: roboroWebsiteHeroImg },
-        description: "Designed and built the marketing site's hero section, from Figma concept through production-ready code.",
+        description:
+          "Designed and built the full web experience. From Figma design concept to custom website in Framer with custom components and CMS collections to power dynamic content.",
       },
       {
         id: "website-landing-page",
-        label: "Website Landing Page",
+        label: "Website Landing Page(s)",
         Icon: IconWindow,
         media: { type: "video", src: roboroLandingPageVideo },
-        description: "The finished landing page live in the browser, showcasing Roboro's real-time legislative alerts.",
+        description:
+          "Created 15+ landing pages for lead generation and to promote event sign-ups. Created custom UI and animations to drive engagement and wired to Mailchimp.",
       },
       {
         id: "product-bills",
         label: "Product Design: Bills",
         Icon: IconSliders,
         media: { type: "image", src: roboroBillsImg },
-        description: "Designed the bill-tracking interface, surfacing priority, sponsors, and status at a glance across every tracked bill.",
+        description:
+          "This 'Suggested Bills' is just one screen of an entire product app design. The product was designed with best practices but a design system wasn't made until the product's maturity had reached the right level. The Figma served an AI-driven design markdown system to power other designs and products for the org.",
       },
       {
         id: "product-calendar",
         label: "Product Design: Calendar",
         Icon: IconCalendar,
         media: { type: "image", src: roboroCalendarImg },
-        description: "Designed the legislative calendar, giving users a clear view of upcoming and past committee events and bill actions.",
+        description:
+          "This 'Calendar' screen is one aspect of a more complex product app design. The calendar page includes many features and includes a lot of important information that needs to be viewed at a glance, including custom labels to flag transcription status. This app's success is all about simplifying complex data.",
       },
     ],
   },

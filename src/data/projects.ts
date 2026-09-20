@@ -24,6 +24,10 @@ import visierHeroVideo from "../assets/screens/visier-hero.mp4";
 import visierPlatformVideo from "../assets/screens/visier-platform.mp4";
 import visierVeeVideo from "../assets/screens/visier-vee.mp4";
 import visierProductLibraryImg from "../assets/screens/visier-product-library.png";
+import atlanticBrandImg from "../assets/screens/atlantic-brand.png";
+import atlanticWebVideo from "../assets/screens/atlantic-web.mp4";
+import sharedBeginningsBrandImg from "../assets/screens/shared-beginnings-brand.png";
+import sharedBeginningsWebVideo from "../assets/screens/shared-beginnings-web.mp4";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -223,25 +227,29 @@ export const clientProjects: ClientProject[] = [
         id: "atlantic-brand",
         label: "Atlantic's Brand",
         Icon: IconImage,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "image", src: atlanticBrandImg },
+        description: "Designed Atlantic Fertility's brand identity, from the logo mark through a full color palette.",
       },
       {
         id: "atlantic-web",
         label: "Atlantic's Web",
         Icon: IconWindow,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "video", src: atlanticWebVideo },
+        description: "Designed and built Atlantic Fertility's website, bringing the new brand to life in Framer.",
       },
       {
         id: "shared-beginnings-brand",
         label: "Shared Beginnings' Brand",
         Icon: IconImage,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "image", src: sharedBeginningsBrandImg },
+        description: "Designed Shared Beginnings' brand identity, from the logo mark through a full color palette.",
       },
       {
         id: "shared-beginnings-web",
         label: "Shared Beginnings' Web",
         Icon: IconWindow,
-        description: "Description TBD — a short paragraph of context for this image will go here.",
+        media: { type: "video", src: sharedBeginningsWebVideo },
+        description: "Designed and built Shared Beginnings' website, bringing the new brand to life in Framer.",
       },
     ],
   },

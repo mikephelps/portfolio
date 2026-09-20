@@ -22,6 +22,31 @@
   --glass-highlight: rgba(255, 255, 255, 0.35);
   --glass-shadow: rgba(0, 0, 0, 0.55);
 
+  /* Multi-function backdrop-filter values are kept as custom properties,
+     not written inline, because this project's CSS minifier (lightningcss,
+     via rolldown-vite) collapses "blur(22px) saturate(140%)" into
+     "blur(22px)saturate(140%)" — no space — in the production build only.
+     That's invalid filter-function-list syntax, so the browser drops the
+     whole declaration: backdrop-filter silently did nothing on the real
+     deployed site even though it worked in dev (unminified). Referencing
+     the value through one of these tokens sidesteps that (lightningcss
+     treats a custom property's value as an opaque token stream and
+     doesn't re-minify what's inside it, so the space survives). Always
+     go through one of these tokens — never write a literal multi-function
+     backdrop-filter value directly in a rule, or this bug comes back.
+
+     Separately: don't pair backdrop-filter with -webkit-backdrop-filter
+     in the same rule here. lightningcss treats them as one logical
+     property and always collapses the pair down to a single declaration
+     — which one survives depends on source order, not on which a real
+     browser actually needs, so a "cross-browser" pair can silently ship
+     as prefix-only (invisible to unprefixed Firefox/older engines) or
+     unprefixed-only. Standard backdrop-filter alone is enough — Safari
+     added unprefixed support in Safari 18, and blur is enhancement-only
+     here (see ScreenBrowser.css), never load-bearing for legibility. */
+  --blur-frost: blur(16px) saturate(140%);
+  --blur-chip: blur(14px) saturate(150%);
+
   /* type */
   --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;

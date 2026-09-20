@@ -184,15 +184,18 @@
 }
 
 /* Per-image context, revealed on hover.
-   blur(16px) saturate(140%) is a value confirmed working in the user's
-   own real Chrome (inspected off a live nav on another of their sites).
-   The earlier "zero blur, zero darkening" report was almost certainly
-   the panel never actually being hovered when screenshotted — the whole
-   panel, including the plain background tint below (nothing to do with
-   backdrop-filter), is hover-gated, so a missed hover would explain both
-   going missing at once. Tint is dialed back from the old near-opaque
-   0.88 so the blur actually reads, but still dark enough on its own that
-   text stays legible even if backdrop-filter doesn't apply somewhere. */
+   Real root cause of every earlier "blur does nothing" report: this
+   project's CSS minifier (lightningcss, via rolldown-vite) collapses a
+   literal "blur(16px) saturate(140%)" into "blur(16px)saturate(140%)" —
+   no space — in the production build only. That's invalid
+   filter-function-list syntax, so the browser drops the whole
+   declaration; backdrop-filter silently did nothing on the live
+   deployed site while working fine in dev and in DevTools (typing a
+   value directly there is always valid, so live edits "worked" and
+   made it look like a value/browser problem). --blur-frost (tokens.css)
+   sidesteps this: lightningcss doesn't re-minify what's inside a custom
+   property, so the space survives. Never write a literal multi-function
+   backdrop-filter value here again — always go through that token. */
 .screen-context-panel {
   position: absolute;
   inset: 0;
@@ -203,8 +206,7 @@
   overflow-y: auto;
   padding: clamp(1.5rem, 4vw, 3rem);
   background: rgba(8, 7, 12, 0.68);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: var(--blur-frost);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--dur-med) var(--ease-premium);

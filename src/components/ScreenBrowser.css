@@ -228,7 +228,13 @@
   transition: opacity var(--dur-med) var(--ease-premium);
 }
 
-.screen-frame-media:hover .screen-context-panel {
+/* Hovering anywhere in the card — including the title bar above the
+   image, which points at this exact reveal via .screen-frame-hint —
+   triggers it, not just the image itself. Scoping this to
+   .screen-frame-media alone made the bar's own "hover for description"
+   hint feel broken, since hovering the thing it was pointing at did
+   nothing. */
+.screen-frame:hover .screen-context-panel {
   opacity: 1;
   pointer-events: auto;
 }

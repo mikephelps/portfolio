@@ -4,7 +4,7 @@ import type { MotionValue } from "framer-motion";
 import type { Screen } from "../data/projects";
 import ScreenFrameMedia from "./ScreenFrameMedia";
 import ImageLightbox from "./ImageLightbox";
-import { IconSearch } from "./Icons";
+import { IconEye, IconSearch } from "./Icons";
 import { easePremium, fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
 import "./ScreenBrowser.css";
 
@@ -102,6 +102,12 @@ export default function ScreenBrowser({ idPrefix, title, screens, rawIndex, acti
                   .replace(/\s+/g, "-")}
                 /{active.id}
               </span>
+              {active.description && (
+                <span className="screen-frame-hint">
+                  <IconEye size={14} strokeWidth={1.6} />
+                  hover for description
+                </span>
+              )}
             </div>
             <div
               className={`screen-frame-media ${active.media ? "screen-frame-media--zoomable" : ""}`}

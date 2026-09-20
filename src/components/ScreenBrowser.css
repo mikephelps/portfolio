@@ -116,6 +116,22 @@
   color: var(--ink-faint);
 }
 
+/* Points at the hover-reveal description panel below — margin-left:auto
+   pushes it to the far right of the bar without disturbing the existing
+   dots/label gap on the left. Only rendered when the active screen
+   actually has a description (see ScreenBrowser.tsx), so it never
+   promises a hover payoff that isn't there. */
+.screen-frame-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+
 /* No fixed aspect-ratio and no min-height here: the container hugs
    whichever child actually renders — a real image/video at its own
    natural size (full width, height following its intrinsic ratio, never

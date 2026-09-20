@@ -50,7 +50,7 @@ export default function Nav() {
             })}
           </ul>
 
-          <a href={resumeHref} download className="nav-resume">
+          <a href={resumeHref} download target="_blank" rel="noopener noreferrer" className="nav-resume">
             <span className="nav-resume-label">Resume</span>
             <span className="nav-resume-icon">
               <IconDownload size={15} />
@@ -91,6 +91,8 @@ export default function Nav() {
             <a
               href={resumeHref}
               download
+              target="_blank"
+              rel="noopener noreferrer"
               className="nav-resume nav-resume--mobile"
               onClick={() => setMenuOpen(false)}
             >

@@ -270,7 +270,7 @@ export const clientProjects: ClientProject[] = [
     screens: [
       {
         id: "atlantic-brand",
-        label: "Atlantic's Brand",
+        label: "Atlantic Fertility Brand",
         Icon: IconImage,
         media: { type: "image", src: atlanticBrandImg },
         description:
@@ -278,7 +278,7 @@ export const clientProjects: ClientProject[] = [
       },
       {
         id: "atlantic-web",
-        label: "Atlantic's Web",
+        label: "Atlantic Fertility Website",
         Icon: IconWindow,
         media: { type: "video", src: atlanticWebVideo },
         description:
@@ -286,7 +286,7 @@ export const clientProjects: ClientProject[] = [
       },
       {
         id: "shared-beginnings-brand",
-        label: "Shared Beginnings' Brand",
+        label: "Shared Beginnings Brand",
         Icon: IconImage,
         media: { type: "image", src: sharedBeginningsBrandImg },
         description:
@@ -294,7 +294,7 @@ export const clientProjects: ClientProject[] = [
       },
       {
         id: "shared-beginnings-web",
-        label: "Shared Beginnings' Web",
+        label: "Shared Beginnings Website",
         Icon: IconWindow,
         media: { type: "video", src: sharedBeginningsWebVideo },
         description:

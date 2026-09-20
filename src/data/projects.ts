@@ -82,13 +82,14 @@ export const clientProjects: ClientProject[] = [
     title: "LinkedIn",
     role: "Senior UX Designer",
     description:
-      "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
+      "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects directly to AEM.",
     tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
     roleDetails: [
-      "Placeholder role notes for LinkedIn — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
-      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the design system took its current shape.",
-      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across design and engineering.",
-      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+      "Before I stepped in, LinkedIn's brand had gone through a rebrand with no system built to carry it on the web side. I co-led the effort to build one from the ground up: token architecture, the brand color system, and the initial component library. I audited 25+ high traffic page templates to find which patterns were actually reused across the site, and that audit became the foundation for what got systemized first. I helped run the weekly stand-ups and office hours that kept the broader design team working from the same source of truth, and I produced a 60-page standards and guidelines document for external agencies so the system could hold up outside our own team too.",
+      "That foundation grew into 70+ raw color primitives and 110 semantic web tokens, covering light and dark mode, with full documentation on contrast, accessibility, links, text over imagery, status, and accent usage. Alongside that, I co-led the build-out of new custom components: heroes, cards, features, banners, the elements that show up everywhere on the site, each with variants and mobile representations, built off an audit of the patterns already in production.",
+      "Along the way, I saw where the real risk was. I put together a Current State / Future State proposal calling out the gaps in our brand release process and in AEM build quality, and used it to get organizational buy-in to shift the team toward a design-system-driven model instead of one-off builds inside of AEM. That proposal, plus a full CMS and design system audit, became the blueprints and roadmap for the system's first iteration.",
+      "The part I'm proudest of came after the foundation was in place. I advocated internally to get Claude Code and Cursor into the design team's hands, then built the workflow around it: Figma's MCP wired to a GitHub design system, so AI-generated web experiences stay tied to the actual tokens and components instead of drifting from them. I used that workflow myself to ship color tokens, responsive typography classes, and custom components, including a Lottie animation, an FAQ accordion, and banners, directly into AEM, working PRs with engineering the whole way and refining the workflow as I went.",
+      "With that same AI-assisted workflow, I worked directly with the SEO team to deliver org-level and page-level structured data schema to AEM, taking schema coverage from 5% to 95% across 4,000+ pages, then followed it with custom components that carried their own schema. I was the first on the team to set up a full local development environment with Claude, Cursor, and MCP tooling, put together demos of a live component build that were featured in a company-wide town hall.",
     ],
     Icon: IconLinkedin,
     screens: [
@@ -110,18 +111,19 @@ export const clientProjects: ClientProject[] = [
       },
       {
         id: "ai-workflow",
-        label: "AI Workflow & Design System",
+        label: "AI Workflow & AI Design System",
         Icon: IconBolt,
         media: { type: "image", src: linkedinAiWorkflowImg },
         description:
-          "Connected Claude and GitHub Copilot into the Figma-to-Adobe pipeline, introducing an AI-assisted workflow for building and maintaining the design system.",
+          "Advocated for internal AI tools (Claude Code, Cursor) and created a workflow for designers working in Figma. Utilized Figma's MCP to create a design system in GitHub for AI generated web experiences that is directly wired to the design system. Introduced a design engineering workflow using Claude Code/Copilot to build directly to AEM.",
       },
       {
         id: "aem-tokens-components",
         label: "AEM: Custom Tokens & Components",
         Icon: IconLayers,
         media: { type: "image", src: linkedinAemTokensComponentsImg },
-        description: "Extended the token architecture into AEM and built custom components, like this accordion, on top of it.",
+        description:
+          "Using Claude Code & Copilot, I shipped the addition of color tokens, responsive typography classes, and created custom components: lottie animation, FAQ accordion, banners. I worked directly with engineering on PRs and refining the skills behind the AI engineering workflow.",
       },
       {
         id: "aem-code-seo",
@@ -129,7 +131,7 @@ export const clientProjects: ClientProject[] = [
         Icon: IconWindow,
         media: { type: "image", src: linkedinAemCodeSeoImg },
         description:
-          "Hand-coded custom AEM components and structured data (JSON-LD schema) to support SEO and AI discovery tools.",
+          "With AI code assistance, I worked directly with the SEO team to quickly deliver org-level and page-level structured data schema to AEM — lifting schema coverage from 5% to 95% across 4,000+ pages. Then quickly followed with creating custom components with additional schema.",
       },
     ],
   },

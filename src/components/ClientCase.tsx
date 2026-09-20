@@ -69,7 +69,13 @@ export default function ClientCase({ project }: ClientCaseProps) {
     const rect = el.getBoundingClientRect();
     const frameTop = rect.top + window.scrollY;
     const scrollRange = el.offsetHeight - window.innerHeight;
-    const desiredProgress = (index + 0.5) / project.screens.length;
+    // 0.96, not 1: landing exactly on the boundary between this tab's
+    // range and the next would make activeIndex's Math.floor round up to
+    // the next tab instead. 0.96 clears that edge case while still
+    // filling the highlight bar almost all the way — landing at the old
+    // 0.5 (this range's midpoint) left it only half-filled, which was
+    // fine for a short label but visibly cut a longer one off mid-word.
+    const desiredProgress = (index + 0.96) / project.screens.length;
     window.scrollTo({ top: frameTop + desiredProgress * scrollRange, behavior: "smooth" });
   };
 

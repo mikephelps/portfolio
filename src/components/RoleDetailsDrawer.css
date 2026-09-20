@@ -8,6 +8,10 @@
   backdrop-filter: var(--blur-frost);
 }
 
+/* The panel itself doesn't scroll — .role-drawer-scroll below does —
+   so the fade overlay can sit in normal flow here, pinned to the
+   panel's bottom edge, without scrolling away with the content it's
+   meant to sit on top of. */
 .role-drawer-panel {
   position: relative;
   width: clamp(320px, 90vw, 560px);
@@ -15,7 +19,33 @@
   background: var(--bg-elevated);
   border-left: 1px solid var(--glass-border);
   box-shadow: -40px 0 100px -30px rgba(0, 0, 0, 0.7);
+}
+
+.role-drawer-scroll {
+  height: 100%;
   overflow-y: auto;
+}
+
+/* Signals there's more to read below without a hard cutoff — fades to
+   the panel's own background color, so it never needs adjusting for
+   paragraph length or viewport size; only whether it's visible does
+   (see RoleDetailsDrawer.tsx, which recomputes that on scroll and on
+   resize). pointer-events: none so it never blocks scrolling or
+   clicking whatever's underneath it. */
+.role-drawer-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, transparent, var(--bg-elevated));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-premium);
+}
+
+.role-drawer-fade--visible {
+  opacity: 1;
 }
 
 .role-drawer-close {

@@ -20,6 +20,10 @@ import roboroWebsiteHeroImg from "../assets/screens/roboro-website-hero.png";
 import roboroLandingPageVideo from "../assets/screens/roboro-landing-page.mp4";
 import roboroBillsImg from "../assets/screens/roboro-bills.png";
 import roboroCalendarImg from "../assets/screens/roboro-calendar.png";
+import visierHeroVideo from "../assets/screens/visier-hero.mp4";
+import visierPlatformVideo from "../assets/screens/visier-platform.mp4";
+import visierVeeVideo from "../assets/screens/visier-vee.mp4";
+import visierProductLibraryImg from "../assets/screens/visier-product-library.png";
 
 type IconType = ComponentType<{ size?: number }>;
 
@@ -62,18 +66,6 @@ export type ClientProject = {
   screens: Screen[];
   Icon: IconType;
 };
-
-// Placeholder screen list shared until real screenshots are ready for each
-// project — one zone so the browser still renders (and pins/scrubs) with
-// something in it rather than an empty state.
-const tbdScreens: Screen[] = [
-  {
-    id: "tbd",
-    label: "Tab sections TBD",
-    Icon: IconLayout,
-    description: "Description TBD — a short paragraph of context for this image will go here.",
-  },
-];
 
 export const clientProjects: ClientProject[] = [
   {
@@ -185,7 +177,36 @@ export const clientProjects: ClientProject[] = [
       "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
     tech: ["Figma", "Design Systems", "Product UI", "Animation"],
     Icon: IconCompass,
-    screens: tbdScreens,
+    screens: [
+      {
+        id: "website-hero",
+        label: "Website Redesign / Hero",
+        Icon: IconWindow,
+        media: { type: "video", src: visierHeroVideo },
+        description: "Redesigned Visier.com's hero, bringing the new brand and design system to the site's front door.",
+      },
+      {
+        id: "platform-ui",
+        label: "Interactive Platform UI w/ Animation",
+        Icon: IconSliders,
+        media: { type: "video", src: visierPlatformVideo },
+        description: "Designed an interactive platform UI with Framer Motion animation, showing the product's insights in motion rather than a static screenshot.",
+      },
+      {
+        id: "ai-agent-hero",
+        label: "AI Agent Rive Animated Hero",
+        Icon: IconBolt,
+        media: { type: "video", src: visierVeeVideo },
+        description: "Designed and animated the AI agent's hero moment in Rive, introducing Visier's AI assistant on the site.",
+      },
+      {
+        id: "product-library",
+        label: "Product Library UI",
+        Icon: IconLayers,
+        media: { type: "image", src: visierProductLibraryImg },
+        description: "Designed the product UI library, from resignation-rate trends to predictive risk scoring, as a system of reusable data components.",
+      },
+    ],
   },
   {
     id: "atlantic-shared-beginnings",

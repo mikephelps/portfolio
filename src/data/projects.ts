@@ -205,40 +205,47 @@ export const clientProjects: ClientProject[] = [
       "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
     tech: ["Figma", "Design Systems", "Product UI", "Animation"],
     roleDetails: [
-      "Placeholder role notes for Visier — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
-      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the redesign took its current shape.",
-      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across design and engineering.",
-      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+      "At Visier, I led a full redesign of the main .com experience, built around a new design system, working directly with engineering the entire way. Part of that meant pushing new tech into a company that hadn't used it before: Rive and Framer Motion animation, brought in to make the site feel like the product it was selling instead of a static brochure.",
+      "The redesign itself covered hundreds of pages with reusable templates and ended up with roughly 80 custom components, all built on React and backed by an IA I worked through with stakeholders in dedicated workshops rather than handing them a nav structure to sign off on. Underneath it, I built the component-based design system that extends Visier's brand and visual identity across multiple digital domains, standards and guidelines included.",
+      "That system did real work. The persona-based homepage redesign built on it cut bounce and drop-off by about 25%, and the resource landing pages I redesigned the same way contributed to 20% year-over-year growth in organic and direct conversions.",
+      "Product marketing wanted a way to tell the platform's story visually, so I worked directly with subject matter experts to build a scroll-triggered interactive experience using multiple Rive animations, engineered to keep an extremely small file footprint so it never slowed the page down.",
+      "When Visier introduced its AI assistant, I partnered with product and product marketing to design and animate its hero moment in Rive, then built out the experience below the fold that walks through the agent's capabilities, prototyping the custom components for it in Figma first.",
+      "Visier's product itself was detailed enough that it didn't translate well to a marketing audience, so I took the initiative to fix that myself. I redesigned the key product moments into a shared Figma library of 200+ custom UI images, now used across the website and pulled directly into the branding team's collateral.",
+      "Underneath all of it, I optimized how the team actually produced these assets, cutting request-to-launch time by about 50%.",
     ],
     Icon: IconCompass,
     screens: [
       {
         id: "website-hero",
-        label: "Website Redesign / Hero",
+        label: "Full Website Redesign",
         Icon: IconWindow,
         media: { type: "video", src: visierHeroVideo },
-        description: "Redesigned Visier.com's hero, bringing the new brand and design system to the site's front door.",
+        description:
+          "This hero is just a small representation of a full redesign of the main .com site for Visier. This hero features custom lottie animation. The website had ~80 custom components and hundreds of pages with templates for reusable pages. Built on React and included a stakeholder workshopped IA for navigation.",
       },
       {
         id: "platform-ui",
         label: "Interactive Platform UI w/ Animation",
         Icon: IconSliders,
         media: { type: "video", src: visierPlatformVideo },
-        description: "Designed an interactive platform UI with Framer Motion animation, showing the product's insights in motion rather than a static screenshot.",
+        description:
+          "The product marketing team wanted to come up with a visual story for the platform. I worked directly with subject matter experts to create a scroll-trigger interactive experience with multiple Rive animations, built to have an extremely small file output footprint.",
       },
       {
         id: "ai-agent-hero",
         label: "AI Agent Rive Animated Hero",
         Icon: IconBolt,
         media: { type: "video", src: visierVeeVideo },
-        description: "Designed and animated the AI agent's hero moment in Rive, introducing Visier's AI assistant on the site.",
+        description:
+          "I partnered with product and product marketing to design and animate the AI agent's hero moment in Rive, introducing Visier's AI assistant on the site. Below the fold was an experience that detailed the agent's capabilities with custom components that I designed prototypes for in Figma.",
       },
       {
         id: "product-library",
         label: "Product Library UI",
         Icon: IconLayers,
         media: { type: "image", src: visierProductLibraryImg },
-        description: "Designed the product UI library, from resignation-rate trends to predictive risk scoring, as a system of reusable data components.",
+        description:
+          "Visier's product was very detailed and didn't cater well on the marketing front. So I took the initiative to redesign key product moments in a library that was over 200 custom UI images that were used all over the website and that the branding team used in their collateral, all from a shared Figma library.",
       },
     ],
   },

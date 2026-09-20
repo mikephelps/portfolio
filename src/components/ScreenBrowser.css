@@ -184,17 +184,15 @@
 }
 
 /* Per-image context, revealed on hover.
-   blur(40px) + ~55% tint was verified (pixel-inspected, this session)
-   to genuinely blur real image content in Chromium — but a live
-   screenshot came back showing zero blur AND zero darkening, on a
-   commit already confirmed deployed. Whatever the cause on that
-   device/browser (a different engine, an OS-level transparency-reduction
-   setting, forced-colors mode — backdrop-filter is exactly the kind of
-   effect those turn off silently), the fix is to stop treating blur as
-   the thing that makes this legible. The background tint alone is now
-   opaque enough on its own to read cleanly with zero blur; backdrop-filter
-   stays on as a pure enhancement for browsers where it renders, never
-   load-bearing for legibility. */
+   blur(16px) saturate(140%) is a value confirmed working in the user's
+   own real Chrome (inspected off a live nav on another of their sites).
+   The earlier "zero blur, zero darkening" report was almost certainly
+   the panel never actually being hovered when screenshotted — the whole
+   panel, including the plain background tint below (nothing to do with
+   backdrop-filter), is hover-gated, so a missed hover would explain both
+   going missing at once. Tint is dialed back from the old near-opaque
+   0.88 so the blur actually reads, but still dark enough on its own that
+   text stays legible even if backdrop-filter doesn't apply somewhere. */
 .screen-context-panel {
   position: absolute;
   inset: 0;
@@ -204,9 +202,9 @@
   justify-content: center;
   overflow-y: auto;
   padding: clamp(1.5rem, 4vw, 3rem);
-  background: rgba(8, 7, 12, 0.88);
-  backdrop-filter: blur(60px) saturate(160%);
-  -webkit-backdrop-filter: blur(60px) saturate(160%);
+  background: rgba(8, 7, 12, 0.68);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--dur-med) var(--ease-premium);

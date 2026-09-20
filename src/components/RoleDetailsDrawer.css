@@ -1,0 +1,78 @@
+.role-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(4, 3, 6, 0.55);
+  backdrop-filter: var(--blur-frost);
+}
+
+.role-drawer-panel {
+  position: relative;
+  width: clamp(320px, 90vw, 560px);
+  height: 100%;
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--glass-border);
+  box-shadow: -40px 0 100px -30px rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+}
+
+.role-drawer-close {
+  position: absolute;
+  top: clamp(1.25rem, 3vw, 2rem);
+  right: clamp(1.25rem, 3vw, 2rem);
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  box-shadow: 0 8px 20px -6px var(--accent-glow);
+  transition:
+    background var(--dur-fast) var(--ease-premium),
+    transform var(--dur-fast) var(--ease-snap);
+}
+
+.role-drawer-close:hover {
+  background: var(--accent-bright);
+  transform: scale(1.06);
+}
+
+.role-drawer-body {
+  padding: clamp(4rem, 9vw, 5rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem);
+}
+
+.role-drawer-eyebrow {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.role-drawer-title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.role-drawer-role {
+  display: block;
+  margin-top: 0.35rem;
+  margin-bottom: 1.75rem;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+}
+
+.role-drawer-paragraph {
+  color: var(--ink-dim);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.role-drawer-paragraph:last-child {
+  margin-bottom: 0;
+}

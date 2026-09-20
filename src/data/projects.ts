@@ -65,6 +65,9 @@ export type ClientProject = {
   role: string;
   description: string;
   tech: string[];
+  // The fuller narrative behind the role, shown in the "View role details"
+  // slide-out drawer — one entry per paragraph. Placeholder copy for now.
+  roleDetails: string[];
   link?: string;
   repo?: string;
   screens: Screen[];
@@ -81,6 +84,12 @@ export const clientProjects: ClientProject[] = [
     description:
       "Co-lead the design system foundation with tokens, colors system, and initial components. Introduced design engineering workflow with Claude/Copilot to build and ship projects in AEM.",
     tech: ["Figma", "Design Systems", "AEM", "Claude", "HTML", "CSS", "GitHub"],
+    roleDetails: [
+      "Placeholder role notes for LinkedIn — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
+      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the design system took its current shape.",
+      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across design and engineering.",
+      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+    ],
     Icon: IconLinkedin,
     screens: [
       {
@@ -88,7 +97,8 @@ export const clientProjects: ClientProject[] = [
         label: "Design System: Color Tokens",
         Icon: IconSliders,
         media: { type: "image", src: linkedinColorTokensImg },
-        description: "Created the design system foundations including full color token architecture.",
+        description:
+          "After new brand rollouts, I created a system in Figma of 70+ raw, primitive color bases and 110 semantic web color tokens, inclusive of light and dark mode collections. This work also included full documentation with color application details and rules and compliance on contrast/accessibility, UI, links, text over imagery, status, accent usage, etc.",
       },
       {
         id: "components",
@@ -96,7 +106,7 @@ export const clientProjects: ClientProject[] = [
         Icon: IconLayout,
         media: { type: "image", src: linkedinComponentsImg },
         description:
-          "Built all new, custom components in Figma including: heroes, cards, features, banners, etc.",
+          "Co-lead build-out of all new, custom components in Figma including: heroes, cards, features, banners that represent all of the foundational and most commonly used elements across the website. This work included auditing existing patterns as well as creating variants and mobile representations of each component.",
       },
       {
         id: "ai-workflow",
@@ -132,6 +142,12 @@ export const clientProjects: ClientProject[] = [
     description:
       "Stood up a full new brand for this startup, followed by designing and building their entire web experience with CMS, and bringing it all together with product UX and design.",
     tech: ["Figma", "Design Systems", "Framer", "Animation"],
+    roleDetails: [
+      "Placeholder role notes for Roboro — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
+      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the brand and site took their current shape.",
+      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across brand, product, and web.",
+      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+    ],
     Icon: IconBolt,
     screens: [
       {
@@ -180,6 +196,12 @@ export const clientProjects: ClientProject[] = [
     description:
       "Redesigned .com experience with a full design system. Worked directly with engineering to build the new site and bring innovative tech into the fold, like Rive & Framer Motion animation.",
     tech: ["Figma", "Design Systems", "Product UI", "Animation"],
+    roleDetails: [
+      "Placeholder role notes for Visier — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
+      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the redesign took its current shape.",
+      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across design and engineering.",
+      "Placeholder paragraph four: outcomes and what this work set up for the team going forward.",
+    ],
     Icon: IconCompass,
     screens: [
       {
@@ -221,6 +243,12 @@ export const clientProjects: ClientProject[] = [
     description:
       "From the ground up. Two sister businesses in the fertility space. Both needed full new brands and websites that I designed and developed.",
     tech: ["Illustrator", "Figma", "Framer", "HTML", "CSS"],
+    roleDetails: [
+      "Placeholder role notes for Atlantic Fertility & Shared Beginnings — real copy coming soon. This panel will hold the fuller narrative about scope, ownership, and impact for this engagement, beyond what the one-line summary and tech chips above can carry.",
+      "Placeholder paragraph two: context on how the work started, who was involved, and what the initial goals were before the two brands and sites took their current shape.",
+      "Placeholder paragraph three: the day-to-day of the role — what shipped, what changed along the way, and how decisions got made across brand and web.",
+      "Placeholder paragraph four: outcomes and what this work set up going forward.",
+    ],
     Icon: IconLayers,
     screens: [
       {

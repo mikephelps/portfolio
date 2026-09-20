@@ -224,9 +224,14 @@
   text-align: left;
 }
 
+/* Overrides .eyebrow's default purple: this sits on top of whatever
+   screenshot happens to be behind it, including light/white ones, where
+   the accent purple loses too much contrast to read reliably. White
+   matches the description text below it and stays legible over anything. */
 .screen-context-eyebrow {
   display: block;
   margin-bottom: 0.7rem;
+  color: var(--ink);
 }
 
 .screen-context-text {

@@ -56,8 +56,43 @@
 }
 
 .client-case-header {
-  max-width: 46rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.client-case-header-text {
+  max-width: 46rem;
+}
+
+/* Plain solid pill, not the nav resume button's sliding-fill treatment —
+   this sits once per project, not in persistent chrome, so a simple hover
+   state is enough. Shrinks to icon-only implied by label wrapping isn't
+   needed since the label itself is short. */
+.client-case-role-details-button {
+  flex-shrink: 0;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.86rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-premium);
+}
+
+.client-case-role-details-button:hover {
+  background: var(--accent-bright);
+}
+
+@media (max-width: 640px) {
+  .client-case-header {
+    flex-direction: column;
+  }
 }
 
 .client-case-meta {

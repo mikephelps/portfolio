@@ -1,22 +1,22 @@
 /* Tilted 3D ring carousel — validated first as a standalone preview, then
-   ported here at hero scale. The ring geometry (radius, card size, tilt,
-   spin duration) is kept identical to the validated version; only the
-   outer viewport's `transform: scale()` changes per breakpoint, since
-   scaling the perspective-establishing element scales the whole 3D scene
-   (including its apparent depth) together. */
+   ported into the hero, then moved here to the About section's portrait
+   slot. The ring geometry (radius, card size, tilt, spin duration) is kept
+   identical to the validated version; only the outer viewport's
+   `transform: scale()` changes per breakpoint, since scaling the
+   perspective-establishing element scales the whole 3D scene (including
+   its apparent depth) together. */
 
-.hero-carousel {
+.work-carousel {
   position: relative;
-  width: min(600px, 44vw);
+  width: 100%;
   aspect-ratio: 1 / 1;
-  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
 }
 
-.hero-carousel-glow {
+.work-carousel-glow {
   position: absolute;
   inset: -18%;
   background: radial-gradient(circle at 55% 42%, var(--accent-glow), transparent 62%);
@@ -25,18 +25,18 @@
   pointer-events: none;
 }
 
-.hero-carousel-viewport {
+.work-carousel-viewport {
   width: 1000px;
   height: 640px;
   flex-shrink: 0;
   perspective: 1700px;
-  transform: scale(0.68);
+  transform: scale(0.6);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-carousel-tilt {
+.work-carousel-tilt {
   position: relative;
   width: 1px;
   height: 1px;
@@ -44,7 +44,7 @@
   transform: rotateX(16deg) rotateZ(-13deg);
 }
 
-.hero-carousel-ring {
+.work-carousel-ring {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
@@ -104,22 +104,14 @@
   }
 }
 
-@media (max-width: 960px) {
-  .hero-carousel {
-    order: -1;
-    width: min(240px, 58vw);
-    aspect-ratio: 1 / 1;
-    align-self: flex-start;
-    margin-bottom: 1.8rem;
-  }
-
-  .hero-carousel-viewport {
-    transform: scale(0.24);
+@media (max-width: 860px) {
+  .work-carousel-viewport {
+    transform: scale(0.34);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-carousel-ring,
+  .work-carousel-ring,
   .hc-orbit-face {
     animation: none !important;
   }

@@ -14,13 +14,13 @@ const tiles = [
   visierResignationImg,
 ];
 
-export default function HeroCarousel() {
+export default function WorkCarousel() {
   return (
-    <div className="hero-carousel" aria-hidden="true">
-      <div className="hero-carousel-glow" />
-      <div className="hero-carousel-viewport">
-        <div className="hero-carousel-tilt">
-          <div className="hero-carousel-ring">
+    <div className="work-carousel" aria-hidden="true">
+      <div className="work-carousel-glow" />
+      <div className="work-carousel-viewport">
+        <div className="work-carousel-tilt">
+          <div className="work-carousel-ring">
             {tiles.map((src, index) => (
               <div
                 className="hc-orbit-position"

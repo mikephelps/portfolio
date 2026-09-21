@@ -1,0 +1,126 @@
+/* Tilted 3D ring carousel — validated first as a standalone preview, then
+   ported here at hero scale. The ring geometry (radius, card size, tilt,
+   spin duration) is kept identical to the validated version; only the
+   outer viewport's `transform: scale()` changes per breakpoint, since
+   scaling the perspective-establishing element scales the whole 3D scene
+   (including its apparent depth) together. */
+
+.hero-carousel {
+  position: relative;
+  width: min(600px, 44vw);
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.hero-carousel-glow {
+  position: absolute;
+  inset: -18%;
+  background: radial-gradient(circle at 55% 42%, var(--accent-glow), transparent 62%);
+  filter: blur(28px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-carousel-viewport {
+  width: 1000px;
+  height: 640px;
+  flex-shrink: 0;
+  perspective: 1700px;
+  transform: scale(0.68);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-carousel-tilt {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+  transform: rotateX(16deg) rotateZ(-13deg);
+}
+
+.hero-carousel-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: hcRingSpin 26s linear infinite;
+}
+
+.hc-orbit-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--angle)) translateZ(230px);
+}
+
+.hc-orbit-face {
+  animation: hcFaceCounterSpin 26s linear infinite;
+}
+
+.hc-tile {
+  position: relative;
+  left: -88px;
+  top: -110px;
+  width: 176px;
+  height: 220px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 18px 40px -12px rgba(0, 0, 0, 0.75),
+    0 4px 14px -4px rgba(0, 0, 0, 0.6);
+  background: #0a0a0a;
+}
+
+.hc-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes hcRingSpin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes hcFaceCounterSpin {
+  from {
+    transform: rotateY(calc(-1 * var(--angle)));
+  }
+  to {
+    transform: rotateY(calc(-1 * var(--angle) - 360deg));
+  }
+}
+
+@media (max-width: 960px) {
+  .hero-carousel {
+    order: -1;
+    width: min(240px, 58vw);
+    aspect-ratio: 1 / 1;
+    align-self: flex-start;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-carousel-viewport {
+    transform: scale(0.24);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel-ring,
+  .hc-orbit-face {
+    animation: none !important;
+  }
+}

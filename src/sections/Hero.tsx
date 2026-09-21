@@ -2,7 +2,13 @@ import { motion, type Variants } from "framer-motion";
 import { IconArrowUpRight } from "../components/Icons";
 import { easePremium, fadeUpItem, staggerContainer } from "../lib/motion";
 import HeroPortrait from "./HeroPortrait";
+import HeroCarousel from "./HeroCarousel";
 import "./Hero.css";
+import "./HeroCarousel.css";
+
+// Trying the 3D screenshot carousel in place of the interactive headshot.
+// Flip this back to false to roll back to HeroPortrait instantly.
+const USE_HERO_CAROUSEL = true;
 
 const headline = ["Mike", "Phelps"];
 
@@ -56,7 +62,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <HeroPortrait />
+      {USE_HERO_CAROUSEL ? <HeroCarousel /> : <HeroPortrait />}
 
       <motion.a
         href="#about"

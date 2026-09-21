@@ -2,10 +2,9 @@ import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import SkillsGrid from "../components/SkillsGrid";
-import WorkCarousel from "./WorkCarousel";
 import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
+import aboutPortraitImg from "../assets/about-portrait.webp";
 import "./About.css";
-import "./WorkCarousel.css";
 
 const stats = [
   { value: "15+", label: "Years in web design & strategy" },
@@ -21,8 +20,9 @@ export default function About() {
       <SectionHeading index="01" eyebrow="About" title="Design led, code fluent" />
 
       <div className="about-grid">
-        <Reveal className="about-carousel-slot" delay={0.05}>
-          <WorkCarousel />
+        <Reveal className="about-portrait glass" delay={0.05}>
+          <img src={aboutPortraitImg} alt="Portrait of Mike Phelps" className="about-portrait-photo" />
+          <div className="about-portrait-glow" aria-hidden="true" />
         </Reveal>
 
         <div className="about-content">

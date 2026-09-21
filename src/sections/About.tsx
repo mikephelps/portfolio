@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
-import Logo from "../components/Logo";
 import SkillsGrid from "../components/SkillsGrid";
 import { fadeUpItem, fadeUpViewport, staggerContainer } from "../lib/motion";
+import aboutPortraitImg from "../assets/about-portrait.webp";
 import "./About.css";
 
 const stats = [
@@ -21,9 +21,7 @@ export default function About() {
 
       <div className="about-grid">
         <Reveal className="about-portrait glass" delay={0.05}>
-          <div className="about-portrait-mark">
-            <Logo size={72} />
-          </div>
+          <img src={aboutPortraitImg} alt="Portrait of Mike Phelps" className="about-portrait-photo" />
           <div className="about-portrait-glow" aria-hidden="true" />
         </Reveal>
 

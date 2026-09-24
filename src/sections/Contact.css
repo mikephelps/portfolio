@@ -55,6 +55,17 @@
   font-weight: 600;
 }
 
+/* The email text is stored reversed in the DOM (see Contact.tsx) and
+   flipped back to normal reading order visually by this bidi override —
+   defeats plain-text scrapers reading rendered DOM text, while looking
+   and copying (via the button's Clipboard API call, not text selection)
+   exactly like a normal email string. */
+.contact-email-text {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display: inline-block;
+}
+
 .contact-email svg {
   color: var(--accent);
   transition: transform var(--dur-fast) var(--ease-snap);
